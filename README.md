@@ -59,13 +59,13 @@ This repository contains a USL interpreter implemented in Python, allowing you t
 1. Clone the Repository
 
    ```bash
-   git clone https://github.com/yourusername/usl_interpreter.git
+   git clone https://github.com/Jordan-Townsend/usl
    ```
 
 2. Navigate to the Project Directory
 
    ```bash
-   cd usl_interpreter
+   cd usl
    ```
 
 3. Install Dependencies

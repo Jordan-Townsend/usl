@@ -393,7 +393,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Author: [Jordan Townsend](https://github.com/Jordan-Townsend)
 - Email: jordan@townsendsdesigns.com
-- GitHub Repository: [github.com/yourusername/usl](https://github.com/yourusername/usl)
+- GitHub Repository: [github.com/Jordan-Townsend/usl]([(https://github.com/Jordan-Townsend/usl))
 
 ---
 

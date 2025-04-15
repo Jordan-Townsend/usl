@@ -1,0 +1,202 @@
+{
+  "en": {
+    "title": "🌐 USL: Universal Scripting Language",
+    "chooseLang": "🌍 Choose Language:",
+    "uploadFile": "📂 Upload File",
+    "editLogic": "📝 Edit or Paste USL Logic",
+    "selectLangs": "🌍 Select Output Languages",
+    "transpileBtn": "🚀 Transpile & Preview",
+    "saveSession": "💾 Save Session",
+    "symbolRef": "📘 Symbolic Reference"
+  },
+  "pt": {
+    "title": "🌐 USL: Linguagem Universal de Script",
+    "chooseLang": "🌍 Escolher Idioma:",
+    "uploadFile": "📂 Enviar Arquivo",
+    "editLogic": "📝 Editar ou Colar Lógica USL",
+    "selectLangs": "🌍 Selecionar Linguagens de Saída",
+    "transpileBtn": "🚀 Transpilar e Visualizar",
+    "saveSession": "💾 Salvar Sessão",
+    "symbolRef": "📘 Referência Simbólica"
+  },
+  "es": {
+    "title": "🌐 USL: Lenguaje Universal de Script",
+    "chooseLang": "🌍 Elegir idioma:",
+    "uploadFile": "📂 Subir archivo",
+    "editLogic": "📝 Editar o pegar lógica USL",
+    "selectLangs": "🌍 Seleccionar idiomas de salida",
+    "transpileBtn": "🚀 Transpilar y previsualizar",
+    "saveSession": "💾 Guardar sesión",
+    "symbolRef": "📘 Referencia simbólica"
+  },
+  "fr": {
+    "title": "🌐 USL: Langage Universel de Script",
+    "chooseLang": "🌍 Choisir la langue :",
+    "uploadFile": "📂 Télécharger un fichier",
+    "editLogic": "📝 Éditer ou coller la logique USL",
+    "selectLangs": "🌍 Sélectionner les langues de sortie",
+    "transpileBtn": "🚀 Transpiler et prévisualiser",
+    "saveSession": "💾 Sauvegarder la session",
+    "symbolRef": "📘 Référence Symbolique"
+  },
+  "de": {
+    "title": "🌐 USL: Universelle Skriptsprache",
+    "chooseLang": "🌍 Sprache wählen:",
+    "uploadFile": "📂 Datei hochladen",
+    "editLogic": "📝 USL-Logik bearbeiten oder einfügen",
+    "selectLangs": "🌍 Ausgabesprachen auswählen",
+    "transpileBtn": "🚀 Transpilieren & Vorschau",
+    "saveSession": "💾 Sitzung speichern",
+    "symbolRef": "📘 Symbolische Referenz"
+  },
+  "zh": {
+    "title": "🌐 USL：通用脚本语言",
+    "chooseLang": "🌍 选择语言：",
+    "uploadFile": "📂 上传文件",
+    "editLogic": "📝 编辑或粘贴 USL 逻辑",
+    "selectLangs": "🌍 选择输出语言",
+    "transpileBtn": "🚀 转译并预览",
+    "saveSession": "💾 保存会话",
+    "symbolRef": "📘 符号参考"
+  },
+  "ja": {
+    "title": "🌐 USL：ユニバーサルスクリプト言語",
+    "chooseLang": "🌍 言語を選択：",
+    "uploadFile": "📂 ファイルをアップロード",
+    "editLogic": "📝 USLロジックを編集または貼り付け",
+    "selectLangs": "🌍 出力言語を選択",
+    "transpileBtn": "🚀 変換してプレビュー",
+    "saveSession": "💾 セッションを保存",
+    "symbolRef": "📘 シンボリックリファレンス"
+  },
+  "ko": {
+    "title": "🌐 USL: 범용 스크립트 언어",
+    "chooseLang": "🌍 언어 선택:",
+    "uploadFile": "📂 파일 업로드",
+    "editLogic": "📝 USL 논리 편집 또는 붙여넣기",
+    "selectLangs": "🌍 출력 언어 선택",
+    "transpileBtn": "🚀 변환 및 미리보기",
+    "saveSession": "💾 세션 저장",
+    "symbolRef": "📘 기호 참조"
+  },
+  "ru": {
+    "title": "🌐 USL: Универсальный скриптовый язык",
+    "chooseLang": "🌍 Выбрать язык:",
+    "uploadFile": "📂 Загрузить файл",
+    "editLogic": "📝 Редактировать или вставить USL-логику",
+    "selectLangs": "🌍 Выбрать языки вывода",
+    "transpileBtn": "🚀 Транспилировать и просмотреть",
+    "saveSession": "💾 Сохранить сессию",
+    "symbolRef": "📘 Символическая справка"
+  },
+  "ar": {
+    "title": "🌐 USL: لغة البرمجة الشاملة",
+    "chooseLang": "🌍 اختر اللغة:",
+    "uploadFile": "📂 تحميل ملف",
+    "editLogic": "📝 تحرير أو لصق منطق USL",
+    "selectLangs": "🌍 اختيار لغات الإخراج",
+    "transpileBtn": "🚀 تحويل ومعاينة",
+    "saveSession": "💾 حفظ الجلسة",
+    "symbolRef": "📘 المرجع الرمزي"
+  },
+  "hi": {
+    "title": "🌐 USL: सार्वभौमिक स्क्रिप्टिंग भाषा",
+    "chooseLang": "🌍 भाषा चुनें:",
+    "uploadFile": "📂 फ़ाइल अपलोड करें",
+    "editLogic": "📝 USL लॉजिक संपादित करें या चिपकाएं",
+    "selectLangs": "🌍 आउटपुट भाषाएँ चुनें",
+    "transpileBtn": "🚀 ट्रांसपाइल और पूर्वावलोकन",
+    "saveSession": "💾 सत्र सहेजें",
+    "symbolRef": "📘 प्रतीक संदर्भ"
+  },
+  "tr": {
+    "title": "🌐 USL: Evrensel Betik Dili",
+    "chooseLang": "🌍 Dil Seçin:",
+    "uploadFile": "📂 Dosya Yükle",
+    "editLogic": "📝 USL mantığını düzenle veya yapıştır",
+    "selectLangs": "🌍 Çıkış dillerini seçin",
+    "transpileBtn": "🚀 Transpile ve Önizleme",
+    "saveSession": "💾 Oturumu Kaydet",
+    "symbolRef": "📘 Sembolik Referans"
+  },
+  "id": {
+    "title": "🌐 USL: Bahasa Skrip Universal",
+    "chooseLang": "🌍 Pilih Bahasa:",
+    "uploadFile": "📂 Unggah Berkas",
+    "editLogic": "📝 Edit atau Tempel Logika USL",
+    "selectLangs": "🌍 Pilih Bahasa Keluaran",
+    "transpileBtn": "🚀 Transpilasi & Pratinjau",
+    "saveSession": "💾 Simpan Sesi",
+    "symbolRef": "📘 Referensi Simbolik"
+  },
+  "vi": {
+    "title": "🌐 USL: Ngôn Ngữ Kịch Bản Phổ Quát",
+    "chooseLang": "🌍 Chọn Ngôn Ngữ:",
+    "uploadFile": "📂 Tải Tệp Lên",
+    "editLogic": "📝 Chỉnh sửa hoặc dán logic USL",
+    "selectLangs": "🌍 Chọn ngôn ngữ đầu ra",
+    "transpileBtn": "🚀 Biên dịch và xem trước",
+    "saveSession": "💾 Lưu phiên",
+    "symbolRef": "📘 Tham chiếu Biểu tượng"
+  },
+  "pl": {
+    "title": "🌐 USL: Uniwersalny Język Skryptowy",
+    "chooseLang": "🌍 Wybierz język:",
+    "uploadFile": "📂 Prześlij plik",
+    "editLogic": "📝 Edytuj lub wklej logikę USL",
+    "selectLangs": "🌍 Wybierz języki wyjściowe",
+    "transpileBtn": "🚀 Transpiluj i podgląd",
+    "saveSession": "💾 Zapisz sesję",
+    "symbolRef": "📘 Odniesienie symboliczne"
+  },
+  "fa": {
+    "title": "🌐 USL: زبان اسکریپت جهانی",
+    "chooseLang": "🌍 انتخاب زبان:",
+    "uploadFile": "📂 بارگذاری فایل",
+    "editLogic": "📝 ویرایش یا چسباندن منطق USL",
+    "selectLangs": "🌍 انتخاب زبان‌های خروجی",
+    "transpileBtn": "🚀 تبدیل و پیش‌نمایش",
+    "saveSession": "💾 ذخیره جلسه",
+    "symbolRef": "📘 مرجع نمادین"
+  },
+  "bn": {
+    "title": "🌐 USL: সার্বজনীন স্ক্রিপ্টিং ভাষা",
+    "chooseLang": "🌍 ভাষা নির্বাচন করুন:",
+    "uploadFile": "📂 ফাইল আপলোড করুন",
+    "editLogic": "📝 USL যুক্তি সম্পাদনা বা পেস্ট করুন",
+    "selectLangs": "🌍 আউটপুট ভাষা নির্বাচন করুন",
+    "transpileBtn": "🚀 ট্রান্সপাইল এবং প্রিভিউ",
+    "saveSession": "💾 সেশন সংরক্ষণ করুন",
+    "symbolRef": "📘 প্রতীক রেফারেন্স"
+  },
+  "ta": {
+    "title": "🌐 USL: உலக ஸ்கிரிப்ட் மொழி",
+    "chooseLang": "🌍 மொழியை தேர்ந்தெடுக்கவும்:",
+    "uploadFile": "📂 கோப்பைப் பதிவேற்றுக",
+    "editLogic": "📝 USL தர்க்கத்தைத் தொகுக்கவும் அல்லது ஒட்டவும்",
+    "selectLangs": "🌍 வெளியீட்டு மொழிகளைத் தேர்ந்தெடுக்கவும்",
+    "transpileBtn": "🚀 மாற்றவும் மற்றும் முன்னோட்டம் பார்க்கவும்",
+    "saveSession": "💾 அமர்வை சேமிக்கவும்",
+    "symbolRef": "📘 குறியீட்டு குறிப்பு"
+  },
+  "he": {
+    "title": "🌐 USL: שפת תסריט אוניברסלית",
+    "chooseLang": "🌍 בחר שפה:",
+    "uploadFile": "📂 העלה קובץ",
+    "editLogic": "📝 ערוך או הדבק את לוגיקת ה-USL",
+    "selectLangs": "🌍 בחר שפות פלט",
+    "transpileBtn": "🚀 המר והצג תצוגה מקדימה",
+    "saveSession": "💾 שמור הפעלה",
+    "symbolRef": "📘 הפניה סימבולית"
+  },
+  "uk": {
+    "title": "🌐 USL: Універсальна мова сценаріїв",
+    "chooseLang": "🌍 Вибрати мову:",
+    "uploadFile": "📂 Завантажити файл",
+    "editLogic": "📝 Редагувати або вставити логіку USL",
+    "selectLangs": "🌍 Виберіть мови виводу",
+    "transpileBtn": "🚀 Транспілювати та переглянути",
+    "saveSession": "💾 Зберегти сесію",
+    "symbolRef": "📘 Символьне посилання"
+  }
+}

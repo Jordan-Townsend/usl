@@ -1,0 +1,140 @@
+{
+  "letAssign": {
+    "en": "Assign a variable",
+    "pt": "Atribuir uma variável",
+    "es": "Asignar una variable",
+    "fr": "Affecter une variable"
+  },
+  "printText": {
+    "en": "Output text",
+    "pt": "Exibir texto",
+    "es": "Imprimir texto",
+    "fr": "Afficher du texte"
+  },
+  "defineFunc": {
+    "en": "Define a function",
+    "pt": "Definir uma função",
+    "es": "Definir una función",
+    "fr": "Définir une fonction"
+  },
+  "ifCheck": {
+    "en": "Conditional check",
+    "pt": "Verificação condicional",
+    "es": "Verificación condicional",
+    "fr": "Vérification conditionnelle"
+  },
+  "loopFor": {
+    "en": "Loop over range or list",
+    "pt": "Laço sobre intervalo ou lista",
+    "es": "Bucle sobre rango o lista",
+    "fr": "Boucle sur une plage ou liste"
+  },
+  "returnVal": {
+    "en": "Return a value",
+    "pt": "Retornar um valor",
+    "es": "Devolver un valor",
+    "fr": "Retourner une valeur"
+  },
+  "throwError": {
+    "en": "Throw an error or exception",
+    "pt": "Lançar erro ou exceção",
+    "es": "Lanzar error o excepción",
+    "fr": "Lancer une erreur ou exception"
+  },
+  "tryCatch": {
+    "en": "Try a block and catch failure",
+    "pt": "Tentar um bloco e capturar falha",
+    "es": "Intentar un bloque y capturar fallo",
+    "fr": "Essayer un bloc et capturer l'erreur"
+  },
+  "breakLoop": {
+    "en": "Break out of loop",
+    "pt": "Interromper laço",
+    "es": "Salir del bucle",
+    "fr": "Quitter la boucle"
+  },
+  "continueNext": {
+    "en": "Continue to next loop iteration",
+    "pt": "Continuar para próxima iteração",
+    "es": "Continuar con la siguiente iteración",
+    "fr": "Continuer à l'itération suivante"
+  },
+  "yieldOut": {
+    "en": "Yield a value from generator",
+    "pt": "Produzir valor de gerador",
+    "es": "Producir valor desde generador",
+    "fr": "Produire une valeur d’un générateur"
+  },
+  "awaitValue": {
+    "en": "Wait for asynchronous result",
+    "pt": "Aguardar resultado assíncrono",
+    "es": "Esperar resultado asíncrono",
+    "fr": "Attendre résultat asynchrone"
+  },
+  "asyncFunc": {
+    "en": "Define asynchronous function",
+    "pt": "Definir função assíncrona",
+    "es": "Definir función asíncrona",
+    "fr": "Définir fonction asynchrone"
+  },
+  "switchCase": {
+    "en": "Switch logic block",
+    "pt": "Bloco de lógica com escolha",
+    "es": "Bloque de lógica condicional múltiple",
+    "fr": "Bloc switch (cas multiples)"
+  },
+  "classDefine": {
+    "en": "Define a class",
+    "pt": "Definir uma classe",
+    "es": "Definir una clase",
+    "fr": "Définir une classe"
+  },
+  "importModule": {
+    "en": "Import a library or module",
+    "pt": "Importar biblioteca ou módulo",
+    "es": "Importar biblioteca o módulo",
+    "fr": "Importer une bibliothèque"
+  },
+  "namespaceScope": {
+    "en": "Wrap logic in namespace",
+    "pt": "Envolver lógica em namespace",
+    "es": "Encapsular lógica en namespace",
+    "fr": "Encapsuler dans un namespace"
+  },
+  "mainEntry": {
+    "en": "Program entry point",
+    "pt": "Ponto de entrada do programa",
+    "es": "Punto de entrada del programa",
+    "fr": "Point d’entrée du programme"
+  },
+  "commentText": {
+    "en": "Add a comment to explain logic",
+    "pt": "Adicionar comentário para explicar lógica",
+    "es": "Agregar comentario para explicar lógica",
+    "fr": "Ajouter un commentaire explicatif"
+  },
+  "elifBranch": {
+    "en": "Else-if logic branch",
+    "pt": "Condicional senão-se",
+    "es": "Rama condicional 'else if'",
+    "fr": "Branche conditionnelle else-if"
+  },
+  "elseBranch": {
+    "en": "Fallback condition branch",
+    "pt": "Bloco condicional alternativo",
+    "es": "Condición alternativa",
+    "fr": "Condition alternative"
+  },
+  "whileLoop": {
+    "en": "Loop while condition is true",
+    "pt": "Laço enquanto condição for verdadeira",
+    "es": "Bucle mientras la condición sea verdadera",
+    "fr": "Boucle tant que la condition est vraie"
+  },
+  "operatorExpr": {
+    "en": "Binary or unary operation",
+    "pt": "Operação binária ou unária",
+    "es": "Operación binaria o unaria",
+    "fr": "Opération binaire ou unaire"
+  }
+}

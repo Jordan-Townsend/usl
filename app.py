@@ -146,14 +146,26 @@ def index():
 <h2>Upload a USL File and Transpile to All 111 Languages</h2>
 <form method="post" enctype="multipart/form-data">
   <label>Select one or more languages:</label><br>
-  <select name="languages" multiple size="15" required>
+  <select id="language-select" name="languages" multiple size="15" required>
+    <option value="usl">USL (original)</option>
+
     <option value="usl">USL (original)</option>
     {% for lang in languages %}
       <option value="{{ lang }}">{{ lang }}</option>
     {% endfor %}
   </select><br><br>
   <input type="file" name="file" required><br><br>
+  <p style="font-size:0.9em;color:gray;">(Hold Ctrl or Cmd to select more than one)</p>
+  <button type="button" onclick="selectAll()">Select All</button><br><br>
   <input type="submit" value="Transpile">
+  <script>
+    function selectAll() {
+      var select = document.getElementById("language-select");
+      for (var i = 0; i < select.options.length; i++) {
+        select.options[i].selected = true;
+      }
+    }
+  </script>
 </form>
 {% if zip_ready %}
 <h3><a href="/download_all">📦 Download All Outputs (ZIP)</a></h3>

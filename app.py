@@ -39,66 +39,72 @@ def transpile(lines, lang, syntax):
                     value = symbolic.split("print(", 1)[1].rsplit(")", 1)[0]
                     f.write(generate_safe(struct.get("print", "{}"), value) + "\n")
                 elif symbolic.startswith("Symbolic: let "):
-                    assign_expr = symbolic.split("let ", 1)[-1]
-                    left, right = assign_expr.split("=")
+                    expr = symbolic.split("let ", 1)[-1]
+                    left, right = expr.split("=")
                     f.write(generate_safe(struct.get("assign", "{} = {}"), left.strip(), right.strip()) + "\n")
-                elif symbolic.startswith("Symbolic: if "):
-                    condition = symbolic[13:]
-                    f.write(generate_safe(struct.get("if", "if {}:\n    {}"), condition.strip(), "print('true')") + "\n")
                 elif symbolic.startswith("Symbolic: function "):
                     header = symbolic.split("function", 1)[-1].strip()
                     name, rest = header.split("(", 1)
                     args = rest.split(")")[0]
-                    f.write(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "print(name)") + "\n")
-                elif symbolic.startswith("Symbolic: loop"):
-                    loop_expr = symbolic.split("loop", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("loop", "for i in range({}):\n  {}"), loop_expr, "pass") + "\n")
-                elif symbolic.startswith("Symbolic: comment"):
-                    comment_text = symbolic.split("comment", 1)[-1].strip().strip('"')
-                    f.write(generate_safe(struct.get("comment", "# {}"), comment_text) + "\n")
-                elif symbolic.startswith("Symbolic: class "):
-                    class_expr = symbolic.split("class", 1)[-1].strip()
-                    name, args = class_expr.split("(", 1)
-                    args = args.strip(")")
-                    f.write(generate_safe(struct.get("class", "class {}({}):\n    def __init__(self):\n        {}"), name.strip(), args.strip(), "pass") + "\n")
-                elif symbolic.startswith("Symbolic: switch"):
-                    f.write(generate_safe(struct.get("switch", "switch({}) {{ case ... }}"), "x") + "\n")
-                elif symbolic.startswith("Symbolic: import "):
-                    imp = symbolic.split("import", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("import", "import {}"), imp) + "\n")
+                    f.write(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "pass") + "\n")
+                elif symbolic.startswith("Symbolic: if "):
+                    cond = symbolic.split("if ", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("if", "if {}:\n    {}"), cond, "pass") + "\n")
+                elif symbolic.startswith("Symbolic: elif "):
+                    cond = symbolic.split("elif ", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("elif", "elif {}:\n    {}"), cond, "pass") + "\n")
+                elif symbolic.startswith("Symbolic: else"):
+                    f.write(generate_safe(struct.get("else", "else:\n    {}"), "pass") + "\n")
+                elif symbolic.startswith("Symbolic: loop "):
+                    expr = symbolic.split("loop ", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("loop", "for i in range({}):\n  {}"), expr, "pass") + "\n")
+                elif symbolic.startswith("Symbolic: while "):
+                    cond = symbolic.split("while ", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("while", "while {}:\n    {}"), cond, "pass") + "\n")
                 elif symbolic.startswith("Symbolic: return "):
                     value = symbolic.split("return", 1)[-1].strip()
                     f.write(generate_safe(struct.get("return", "return {}"), value) + "\n")
+                elif symbolic.startswith("Symbolic: throw "):
+                    value = symbolic.split("throw", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("throw", "throw {}"), value) + "\n")
+                elif symbolic.startswith("Symbolic: yield"):
+                    value = symbolic.split("yield", 1)[-1].strip() or "value"
+                    f.write(generate_safe(struct.get("yield", "yield {}"), value) + "\n")
+                elif symbolic.startswith("Symbolic: await "):
+                    val = symbolic.split("await ", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("await", "await {}"), val) + "\n")
+                elif symbolic.startswith("Symbolic: async"):
+                    f.write(generate_safe(struct.get("async", "async function {}({}) {{ {} }}"), "fetch", "url", "await fetch(url)") + "\n")
                 elif symbolic.startswith("Symbolic: try"):
                     f.write(generate_safe(struct.get("try", "try {{ {} }} catch {{ {} }}"), "attempt", "handle") + "\n")
                 elif symbolic.startswith("Symbolic: break"):
                     f.write(generate_safe(struct.get("break", "break")) + "\n")
                 elif symbolic.startswith("Symbolic: continue"):
                     f.write(generate_safe(struct.get("continue", "continue")) + "\n")
-                elif symbolic.startswith("Symbolic: else"):
-                    f.write(generate_safe(struct.get("else", "else:\n    {}"), "print('else')") + "\n")
-                elif symbolic.startswith("Symbolic: elif "):
-                    cond = symbolic.split("elif", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("elif", "elif {}:\n    {}"), cond, "print('elif')") + "\n")
-                elif symbolic.startswith("Symbolic: while "):
-                    condition = symbolic.split("while", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("while", "while {}:\n    {}"), condition, "pass") + "\n")
-                elif symbolic.startswith("Symbolic: throw"):
-                    f.write(generate_safe(struct.get("throw", "throw {}"), "Error") + "\n")
-                elif symbolic.startswith("Symbolic: async"):
-                    f.write(generate_safe(struct.get("async", "async function {}({}) {{ {} }}"), "fetch", "url", "await fetch(url)") + "\n")
-                elif symbolic.startswith("Symbolic: await"):
-                    f.write(generate_safe(struct.get("await", "await {}"), "result") + "\n")
-                elif symbolic.startswith("Symbolic: yield"):
-                    f.write(generate_safe(struct.get("yield", "yield {}"), "value") + "\n")
-                elif symbolic.startswith("Symbolic: operator"):
-                    f.write(generate_safe(struct.get("operator", "{} + {}"), "a", "b") + "\n")
-                elif symbolic.startswith("Symbolic: namespace"):
-                    f.write(generate_safe(struct.get("namespace", "namespace {} {{ {} }}"), "myApp", "// logic") + "\n")
+                elif symbolic.startswith("Symbolic: comment"):
+                    text = symbolic.split("comment", 1)[-1].strip().strip('"')
+                    f.write(generate_safe(struct.get("comment", "# {}"), text) + "\n")
+                elif symbolic.startswith("Symbolic: import "):
+                    val = symbolic.split("import", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("import", "import {}"), val) + "\n")
+                elif symbolic.startswith("Symbolic: switch "):
+                    val = symbolic.split("switch", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("switch", "switch({})"), val) + "\n")
+                elif symbolic.startswith("Symbolic: class "):
+                    header = symbolic.split("class", 1)[-1].strip()
+                    name, rest = header.split("(", 1)
+                    args = rest.split(")")[0]
+                    f.write(generate_safe(struct.get("class", "class {}({}):\n    def __init__(self):\n        {}"), name.strip(), args.strip(), "pass") + "\n")
+                elif symbolic.startswith("Symbolic: operator "):
+                    expr = symbolic.split("operator", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("operator", "{}"), expr) + "\n")
+                elif symbolic.startswith("Symbolic: namespace "):
+                    ns = symbolic.split("namespace", 1)[-1].strip()
+                    f.write(generate_safe(struct.get("namespace", "namespace {} {{ {} }}"), ns, "// logic") + "\n")
                 elif symbolic.startswith("Symbolic: main"):
                     f.write(generate_safe(struct.get("main", "int main() {{ {} }}"), "return 0;") + "\n")
                 else:
-                    f.write(comment.format("Unrecognized: " + symbolic) + "\n")
+                    f.write(comment.format("Unparsed: " + symbolic) + "\n")
             except Exception as e:
                 f.write(comment.format(f"Error: {str(e)} in line: {symbolic}") + "\n")
     return filename

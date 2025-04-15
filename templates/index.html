@@ -180,6 +180,70 @@
   };
 </script>
 
+
+<script>
+  let currentLang = "en";
+  let consttranslations = {};
+
+  function setLang(lang) {
+    currentLang = lang;
+    applyTranslations();
+    fetchSymbolReference(lang);
+  }
+
+  function applyTranslations() {
+    fetch("/static/translations_extended.json")
+      .then(res => res.json())
+      .then(data => {
+        translations = data;
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[currentLang] && translations[currentLang][key]) {
+            el.innerText = translations[currentLang][key];
+          } else if (translations["en"] && translations["en"][key]) {
+            el.innerText = translations["en"][key];
+          }
+        });
+      })
+      .catch(() => console.warn("Failed to load translations."));
+  }
+
+  async function fetchLanguages() {
+    try {
+      const res = await fetch("/languages");
+      const langs = await res.json();
+      const langSelect = document.getElementById("langSelectOutput");
+      langSelect.innerHTML = "";
+      langs.forEach(lang => {
+        const opt = document.createElement("option");
+        opt.value = lang;
+        opt.innerText = lang;
+        langSelect.appendChild(opt);
+      });
+    } catch (err) {
+      console.error("Error loading languages:", err);
+    }
+  }
+
+  async function fetchSymbolReference(lang = "en") {
+    try {
+      const res = await fetch("/symbol_reference");
+      const data = await res.json();
+      const block = document.getElementById("symbolRefBlock");
+      block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) =>
+        `<li><strong>${key}</strong> – ${val[lang] || val["en"]}</li>`).join("") + "</ul>";
+    } catch {
+      document.getElementById("symbolRefBlock").innerText = "⚠️ Failed to load symbolic reference.";
+    }
+  }
+
+  window.onload = () => {
+    fetchLanguages();
+    fetchSymbolReference();
+    setLang("en");
+  };
+</script>
+
 </body>
     
 </html>

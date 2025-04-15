@@ -71,7 +71,7 @@
       <label><span data-i18n="editLogic">📝 Edit or Paste USL Logic</span></label>
       <textarea id="uslInput" placeholder="Symbolic: print('Hello')..."></textarea>
 
-      <label><span data-i18n="selectLangs">🌍 Select Output Languages</span></label>
+      <label><span data-i18n="selectLangs">🌍 Select Output Languages</span><br><small style="color: #aaa;">Select one or more languages to convert your USL into.</small></label>
       <select id="langSelectOutput" multiple></select>
 
       <button><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
@@ -134,6 +134,7 @@
     }
 
     window.onload = () => {
+      populateOutputLanguages();
       populateOutputLanguages();
       setLang("en");
     };

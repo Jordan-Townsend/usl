@@ -1,4 +1,3 @@
-
 import os
 import json
 import zipfile
@@ -44,7 +43,7 @@ def transpile(lines, lang, syntax):
     output_path = os.path.join(OUTPUT_DIR, filename)
     parsed = parse_usl_lines(lines, lang)
 
-    with open(output_path, "w", encoding="utf-8") as f:
+    with open(output_path, "w") as f:
         f.write(comment.format(f"This is {lang} syntax") + "\n")
         for symbolic in parsed:
             try:
@@ -91,6 +90,7 @@ def transpile_api():
     usl_input = request.json.get("uslInput", "")
     selected_langs = request.json.get("languages", [])
     outputs = {}
+
     lines = usl_input.splitlines()
 
     for lang in selected_langs:
@@ -126,11 +126,28 @@ def transpile_api():
                     result_lines.append(comment.format("Unrecognized: " + symbolic))
             except Exception as e:
                 result_lines.append(comment.format(f"Error: {e} in line: {symbolic}"))
-        output_text = "\n".join(result_lines)
-        outputs[lang] = output_text
-        with open(os.path.join(OUTPUT_DIR, f"{lang}.{syntax[lang]['file_extensions'][0]}"), "w", encoding="utf-8") as f:
-            f.write(output_text)
-    return jsonify({ "success": True, "outputs": outputs })
+        outputs[lang] = "\n".join(result_lines)
+    return jsonify(outputs)
+
+@app.route("/process", methods=["POST"])
+def process_file_or_form():
+    syntax = load_syntax()
+    results = {}
+    uploaded_file = request.files.get("usl_file")
+    input_text = request.form.get("usl_code", "")
+    lines = uploaded_file.read().decode().splitlines() if uploaded_file else input_text.splitlines()
+    languages = request.form.getlist("languages")
+
+    for lang in languages:
+        if lang == "usl":
+            with open(os.path.join(OUTPUT_DIR, "usl_input_original.usl"), "w") as f:
+                f.writelines(line + "\n" for line in lines)
+            results["usl"] = "\n".join(lines)
+        else:
+            filename = transpile(lines, lang, syntax)
+            with open(os.path.join(OUTPUT_DIR, filename), "r") as f:
+                results[lang] = f.read()
+    return jsonify(results)
 
 @app.route("/download")
 def download_all():

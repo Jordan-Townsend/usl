@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,12 +22,11 @@
       border-radius: 8px;
       margin-bottom: 2em;
     }
-    select,
     select {
       color: #000 !important;
       background-color: #fff !important;
     }
- input, textarea, button {
+    input, textarea, button {
       width: 100%;
       padding: 0.75em;
       border: none;
@@ -71,32 +69,32 @@
       <label><span data-i18n="editLogic">📝 Edit or Paste USL Logic</span></label>
       <textarea id="uslInput" placeholder="Symbolic: print('Hello')..."></textarea>
 
-      <label><span data-i18n="selectLangs">🌍 Select Output Languages</span><br><small style="color: #aaa;">Select one or more languages to convert your USL into.</small></label>
+      <label><span data-i18n="selectLangs">🌍 Select Output Languages</span><br>
+        <small style="color: #aaa;">Select one or more languages to convert your USL into.</small>
+      </label>
       <select id="langSelectOutput" multiple></select>
 
-      <button><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
-      <button><span data-i18n="saveSession">💾 Save Session</span></button>
-    <div id="downloadSection" style="display:none; margin-top:1em;">
-      <button onclick="window.location.href='/download'">
-        📦 Download All Outputs (ZIP)
-      </button>
-    </div>
-    <!-- CONDITIONAL DOWNLOAD BUTTON -->
-    
-    
-    
+      <button onclick="transpile()"><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
+      <button onclick="saveSession()"><span data-i18n="saveSession">💾 Save Session</span></button>
+       <button onclick="clearSession()"><span data-i18n="clearSession">🗑 Clear Session</span></button>
+      <div id="downloadSection" style="display:none; margin-top:1em;">
+        <button onclick="window.location.href='/download'">
+          📦 Download All Outputs (ZIP)
+        </button>
+      </div>
     </div>
 
     <div class="card">
       <h2><span data-i18n="symbolRef">📘 Symbolic Reference</span></h2>
       <div class="symbol-help" id="symbolRefBlock">
-        <span>Loading symbolic reference...</span>
+        Loading symbolic reference...
       </div>
     </div>
   </div>
 
   <script>
-    
+    let translations = {};
+    let currentLang = "en";
 
     function previewFile() {
       const input = document.getElementById("fileInput");
@@ -109,150 +107,100 @@
     }
 
     function setLang(lang) {
-      const elements = document.querySelectorAll("[data-i18n]");
-      elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (translations[lang] && translations[lang][key]) {
-          el.innerText = translations[lang][key];
-        }
-      });
-      renderSymbolReference(lang);
+      currentLang = lang;
+      localStorage.setItem("preferredLang", lang);
+      applyTranslations();
+      fetchSymbolReference(lang);
     }
 
-    function renderSymbolReference(lang) {
-      fetch("/symbol_reference")
+    function applyTranslations() {
+      fetch("/translations_extended.json")
         .then(res => res.json())
         .then(data => {
-          const block = document.getElementById("symbolRefBlock");
-          block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) => {
-            return `<li><strong>${key}</strong> – ${val[lang] || val["en"]}</li>`;
-          }).join("") + "</ul>";
-        })
-        .catch(() => {
-          document.getElementById("symbolRefBlock").innerText = "⚠️ Failed to load symbolic reference.";
+          translations = data;
+          document.querySelectorAll("[data-i18n]").forEach(el => {
+            const key = el.getAttribute("data-i18n");
+            if (translations[currentLang] && translations[currentLang][key]) {
+              el.innerText = translations[currentLang][key];
+            } else if (translations["en"] && translations["en"][key]) {
+              el.innerText = translations["en"][key];
+            }
+          });
+          populateUILanguageSelector();
         });
+    }
+
+    function populateUILanguageSelector() {
+      const select = document.getElementById("langSelect");
+      select.innerHTML = "";
+      Object.keys(translations).forEach(langCode => {
+        const option = document.createElement("option");
+        option.value = langCode;
+        option.textContent = langCode;
+        if (langCode === currentLang) option.selected = true;
+        select.appendChild(option);
+      });
+    }
+
+    async function fetchLanguages() {
+      const res = await fetch("/languages");
+      const langs = await res.json();
+      const langSelect = document.getElementById("langSelectOutput");
+      langSelect.innerHTML = "";
+      langs.forEach(lang => {
+        const opt = document.createElement("option");
+        opt.value = lang;
+        opt.textContent = lang;
+        langSelect.appendChild(opt);
+      });
+    }
+
+    async function fetchSymbolReference(lang = "en") {
+      const res = await fetch("/symbol_reference");
+      const data = await res.json();
+      const block = document.getElementById("symbolRefBlock");
+      block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) =>
+        `<li><strong>${key}</strong> – ${val[lang] || val["en"]}</li>`).join("") + "</ul>";
+    }
+
+    
+    function saveSession() {
+      const code = document.getElementById("uslInput").value;
+      const langs = Array.from(document.getElementById("langSelectOutput").selectedOptions).map(opt => opt.value);
+      localStorage.setItem("usl_code", code);
+      localStorage.setItem("usl_langs", JSON.stringify(langs));
+      alert("Session saved!");
+    }
+
+    function clearSession() {
+      localStorage.removeItem("usl_code");
+      localStorage.removeItem("usl_langs");
+      alert("Session cleared!");
+      location.reload();
+    }
+ {
+      const savedCode = localStorage.getItem("usl_code");
+      const savedLangs = JSON.parse(localStorage.getItem("usl_langs") || "[]");
+      if (savedCode) document.getElementById("uslInput").value = savedCode;
+      const langSelect = document.getElementById("langSelectOutput");
+      for (let i = 0; i < langSelect.options.length; i++) {
+        langSelect.options[i].selected = savedLangs.includes(langSelect.options[i].value);
+      }
+    }
+
+function transpile() {
+      alert("Transpilation triggered!");
+      document.getElementById("downloadSection").style.display = "block";
     }
 
     window.onload = () => {
-      populateOutputLanguages();
-      populateOutputLanguages();
-      populateUILanguageSelector();
-    const langPref = localStorage.getItem("preferredLang") || "en";
-    populateUILanguageSelector();
-    setLang(langPref);
+  restoreSession();
+      const langPref = localStorage.getItem("preferredLang") || "en";
+      currentLang = langPref;
+      fetchLanguages();
+      applyTranslations();
+      fetchSymbolReference(langPref);
     };
-  let translations = {};
-</script>
-
-    <script>
-      function showDownloadButton() {
-        document.getElementById("downloadSection").style.display = "block";
-      }
-    
-</script>
-    
-<script>
-  async function fetchLanguages() {
-    try {
-      const res = await fetch("/languages");
-      const langs = await res.json();
-      const langSelect = document.getElementById("langSelectOutput");
-      langSelect.innerHTML = "";
-      langs.forEach(lang => {
-        const opt = document.createElement("option");
-        opt.value = lang;
-        opt.innerText = lang;
-        langSelect.appendChild(opt);
-      });
-    } catch (err) {
-      console.error("Error loading languages:", err);
-    }
-  }
-
-  async function fetchSymbolReference(lang = "en") {
-    try {
-      const res = await fetch("/symbol_reference");
-      const data = await res.json();
-      const block = document.getElementById("symbolRefBlock");
-      block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) =>
-        `<li><strong>${key}</strong> – ${val[lang] || val["en"]}</li>`).join("") + "</ul>";
-    } catch {
-      document.getElementById("symbolRefBlock").innerText = "⚠️ Failed to load symbolic reference.";
-    }
-  }
-
-  window.onload = () => {
-    fetchLanguages();
-    fetchSymbolReference();
-  };
-
-</script>
-
-
-<script>
-  let currentLang = "en";
-  
-
-  function setLang(lang) {
-    currentLang = lang;
-    applyTranslations();
-    fetchSymbolReference(lang);
-  }
-
-  function applyTranslations() {
-    fetch("/static/translations_extended.json")
-      .then(res => res.json())
-      .then(data => {
-        translations = data;
-        document.querySelectorAll("[data-i18n]").forEach(el => {
-          const key = el.getAttribute("data-i18n");
-          if (translations[currentLang] && translations[currentLang][key]) {
-            el.innerText = translations[currentLang][key];
-          } else if (translations["en"] && translations["en"][key]) {
-            el.innerText = translations["en"][key];
-          }
-        });
-      })
-      .catch(() => console.warn("Failed to load translations."));
-  }
-
-  async function fetchLanguages() {
-    try {
-      const res = await fetch("/languages");
-      const langs = await res.json();
-      const langSelect = document.getElementById("langSelectOutput");
-      langSelect.innerHTML = "";
-      langs.forEach(lang => {
-        const opt = document.createElement("option");
-        opt.value = lang;
-        opt.innerText = lang;
-        langSelect.appendChild(opt);
-      });
-    } catch (err) {
-      console.error("Error loading languages:", err);
-    }
-  }
-
-  async function fetchSymbolReference(lang = "en") {
-    try {
-      const res = await fetch("/symbol_reference");
-      const data = await res.json();
-      const block = document.getElementById("symbolRefBlock");
-      block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) =>
-        `<li><strong>${key}</strong> – ${val[lang] || val["en"]}</li>`).join("") + "</ul>";
-    } catch {
-      document.getElementById("symbolRefBlock").innerText = "⚠️ Failed to load symbolic reference.";
-    }
-  }
-
-  window.onload = () => {
-    fetchLanguages();
-    fetchSymbolReference();
-    setLang("en");
-  };
-
-</script>
-
+  </script>
 </body>
-    
 </html>

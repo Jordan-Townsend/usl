@@ -1,4 +1,3 @@
-
 import os
 import json
 import zipfile
@@ -89,59 +88,39 @@ def get_languages():
     syntax = load_syntax()
     return jsonify(sorted(syntax.keys()))
 
-@app.route("/transpile", methods=["POST"])
-def transpile_api():
+@app.route("/process", methods=["POST"])
+def process_file_or_form():
     syntax = load_syntax()
-    usl_input = request.json.get("uslInput", "")
-    selected_langs = request.json.get("languages", [])
-    outputs = {}
+    results = {}
+    uploaded_file = request.files.get("usl_file")
+    input_text = request.form.get("usl_code", "")
+    lines = uploaded_file.read().decode().splitlines() if uploaded_file else input_text.splitlines()
+    languages = request.form.getlist("languages")
 
-    lines = usl_input.splitlines()
+    for lang in languages:
+        if lang == "usl":
+            with open(os.path.join(OUTPUT_DIR, "usl_input_original.usl"), "w", encoding="utf-8") as f:
+                f.writelines(line + "\n" for line in lines)
+            results["usl"] = "\n".join(lines)
+        else:
+            filename = transpile(lines, lang, syntax)
+            with open(os.path.join(OUTPUT_DIR, filename), "r", encoding="utf-8") as f:
+                results[lang] = f.read()
 
-    for lang in selected_langs:
-        if lang not in syntax:
-            outputs[lang] = "// Language not supported."
-            continue
-        struct = syntax[lang]["structure"]
-        comment = struct.get("comment", "# {}")
-        parsed = parse_usl_lines(lines, lang)
-        result_lines = []
-        for symbolic in parsed:
-            try:
-                if "print(" in symbolic:
-                    val = symbolic.split("print(", 1)[1].split(")", 1)[0]
-                    result_lines.append(generate_safe(struct.get("print", "{}"), val))
-                elif "let " in symbolic and "=" in symbolic:
-                    assign = symbolic.split("let ", 1)[1]
-                    left, right = assign.split("=", 1)
-                    result_lines.append(generate_safe(struct.get("assign", "{} = {}"), left.strip(), right.strip()))
-                elif symbolic.startswith("if "):
-                    cond = symbolic[3:]
-                    result_lines.append(generate_safe(struct.get("if", "if {}:\n    {}"), cond.strip(), "pass"))
-                elif symbolic.startswith("function "):
-                    head = symbolic.split("function", 1)[-1].strip()
-                    if "(" in head:
-                        name, args = head.split("(", 1)
-                        args = args.rstrip(")")
-                        result_lines.append(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "pass"))
-                elif symbolic.startswith("return "):
-                    result_lines.append(generate_safe(struct.get("return", "return {}"), symbolic.split("return", 1)[-1].strip()))
-                elif symbolic.startswith("comment "):
-                    result_lines.append(generate_safe(struct.get("comment", "# {}"), symbolic.split("comment", 1)[-1].strip().strip('"')))
-                else:
-                    result_lines.append(comment.format("Unrecognized: " + symbolic))
-            except Exception as e:
-                result_lines.append(comment.format(f"Error: {e} in line: {symbolic}"))
-        outputs[lang] = "\n".join(result_lines)
-    return jsonify({ "success": True, "outputs": outputs })
-
-@app.route("/download")
-def download_all():
+    # Build ZIP of outputs
     zip_path = os.path.join(OUTPUT_DIR, "all_outputs.zip")
     with zipfile.ZipFile(zip_path, "w") as zipf:
         for f in os.listdir(OUTPUT_DIR):
             if not f.endswith(".zip"):
                 zipf.write(os.path.join(OUTPUT_DIR, f), arcname=f)
+
+    return jsonify({ "success": True, "outputs": results })
+
+@app.route("/download")
+def download_all():
+    zip_path = os.path.join(OUTPUT_DIR, "all_outputs.zip")
+    if not os.path.exists(zip_path):
+        return "No zip file found.", 404
     return send_file(zip_path, as_attachment=True)
 
 if __name__ == "__main__":

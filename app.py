@@ -130,7 +130,13 @@ def index():
             file.save(path)
             with open(path, "r") as f:
                 lines = f.readlines()
-            for lang in languages:
+            selected_langs = request.form.getlist("languages")
+            for lang in selected_langs:
+                if lang == "usl":
+                    with open(os.path.join(OUTPUT_DIR, "usl_input_original.usl"), "w") as f_out:
+                        f_out.writelines(lines)
+                    continue
+                transpile(lines, lang, syntax)
                 transpile(lines, lang, syntax)
             build_zip()
             zip_ready = True
@@ -139,6 +145,13 @@ def index():
 <body>
 <h2>Upload a USL File and Transpile to All 111 Languages</h2>
 <form method="post" enctype="multipart/form-data">
+  <label>Select one or more languages:</label><br>
+  <select name="languages" multiple size="15" required>
+    <option value="usl">USL (original)</option>
+    {% for lang in languages %}
+      <option value="{{ lang }}">{{ lang }}</option>
+    {% endfor %}
+  </select><br><br>
   <input type="file" name="file" required><br><br>
   <input type="submit" value="Transpile">
 </form>

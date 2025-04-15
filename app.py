@@ -36,7 +36,6 @@ def transpile(lines, lang, syntax):
     output_path = os.path.join(OUTPUT_DIR, filename)
     parsed = parse_usl_lines(lines, lang)
 
-    
     error_log_path = os.path.join(OUTPUT_DIR, lang + "_log.txt")
     error_lines = []
     with open(output_path, "w") as f:
@@ -67,7 +66,7 @@ def transpile(lines, lang, syntax):
             except Exception as e:
                 error_lines.append(f"[{lang}] Line Error: {str(e)} in line: {symbolic}")
                 f.write(comment.format(f"Error: {e} in line: {symbolic}") + "\n")
-        if error_lines:
+    if error_lines:
         with open(error_log_path, "w") as errfile:
             for err in error_lines:
                 errfile.write(err + "\n")

@@ -3,6 +3,7 @@ import os
 import json
 import zipfile
 from flask import Flask, request, render_template_string, send_file
+from reverse_parser import reverse_parser, detect_language_by_extension
 
 app = Flask(__name__)
 UPLOAD_DIR = "usl_web_uploads"
@@ -132,6 +133,17 @@ def index():
     if request.method == "POST":
         file = request.files.get("file")
         if file:
+            ext_lang = detect_language_by_extension(file.filename)
+        path = os.path.join(UPLOAD_DIR, file.filename)
+        file.save(path)
+        with open(path, "r") as f:
+            lines = f.readlines()
+
+        # Auto-reverse non-USL files
+        if not any(line.startswith("Symbolic:") for line in lines):
+            reversed_usl = reverse_parser(lines, ext_lang)
+            lines = [line + "\n" for line in reversed_usl]  # replace with reversed lines
+
             path = os.path.join(UPLOAD_DIR, file.filename)
             file.save(path)
             with open(path, "r") as f:
@@ -150,7 +162,22 @@ def index():
     return render_template_string("""<html><head><title>USL Hosted App</title></head>
 <body>
 <h2>Upload a USL File and Transpile to All 111 Languages</h2>
-<form method="post" enctype="multipart/form-data">
+<form id="upload-form" method="post" enctype="multipart/form-data">
+  <p><b>Drop a .usl or .py/.js/.c file below or use Browse:</b></p>
+  <input type="file" name="file" id="fileInput" required><br><br>
+  <textarea id="preview" name="usl_preview" style="width:100%;height:150px;" readonly></textarea><br><br>
+  <script>
+    document.getElementById("fileInput").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById("preview").value = evt.target.result;
+        };
+        reader.readAsText(file);
+      }
+    });
+  </script>
   <label>Select one or more languages:</label><br>
   <select id="language-select" name="languages" multiple size="15" required>
     <option value="usl">USL (original)</option>

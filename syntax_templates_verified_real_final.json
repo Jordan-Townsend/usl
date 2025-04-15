@@ -1,0 +1,1638 @@
+{
+  "mathematica": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "mat"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "vhdl": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "vhd"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "yacas": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "yac"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "python": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pyt"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "erlang": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "erl"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "sed": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sed"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "pocolisp": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "poc"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "haxe": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "hax"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "icon": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "ico"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "janet": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "jan"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "boo": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "boo"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "vala": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "val"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "tcl": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "tcl"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "fortran": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "for"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "typescript": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "typ"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "hack": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "hac"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "oberon": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "obe"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "rust": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "rus"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "pure": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pur"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "applescript": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "app"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "squirrel": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "squ"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "ruby": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "rub"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "groovy": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "gro"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "zpl": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "zpl"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "ada": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "ada"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "clist": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "cli"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "postscript": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pos"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "gml": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "gml"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "css": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "css"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "prolog": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pro"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "livecode": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "liv"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "verilog": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "ver"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "elena": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "ele"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "bliss": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "bli"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "maclisp": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "mac"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "snobol": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sno"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "jovial": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "jov"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "vbnet": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "vbn"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "xtend": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "xte"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "vbscript": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "vbs"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "myrddin": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "myr"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "rebol": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "reb"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "zimbu": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "zim"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "processing": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pro"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "php": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "php"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "pike": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pik"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "nickle": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "nic"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "pop11": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pop"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "swift": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "swi"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "idl": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "idl"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "smalltalk": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sma"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "eiffel": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "eif"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "forth": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "for"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "zsh": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "zsh"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "nim": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "nim"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "makefile": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "mak"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "javascript": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "jav"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "ceylon": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "cey"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "delphi": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "del"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "c": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "c"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "pascal": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pas"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "bash": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "bas"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "sather": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sat"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "xotcl": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "xot"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "html": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "htm"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "dart": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "dar"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "frege": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "fre"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "scala": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sca"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "tex": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "tex"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "matlab": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "mat"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "d": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "d"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "cpp": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "cpp"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "nial": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "nia"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "ring": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "rin"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "mumps": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "mum"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "go": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "go"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "clojure": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "clo"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "powershell": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pow"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "elixir": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "eli"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "fsharp": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "fsh"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "opal": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "opa"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "julia": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "jul"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "maxima": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "max"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "wren": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "wre"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "yorick": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "yor"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "logo": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "log"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "assembly": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "ass"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "labview": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "lab"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "algol": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "alg"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "lua": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "lua"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "simula": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sim"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "kotlin": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "kot"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "modula": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "mod"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  },
+  "lily": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "lil"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "cobra": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "cob"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "scheme": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sch"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "sql": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\n-- SELECT {}",
+      "assign": "-- Assigns a value to a variable\n-- LET {} = {}",
+      "function": "-- Defines a reusable block of code or routine\n-- FUNC {}({}) BEGIN ... END;",
+      "loop": "-- Iterates over a sequence or range\n-- use cursor/iterator",
+      "if": "-- Performs conditional logic\n-- IF {} THEN {}",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sql"
+    ],
+    "example": "-- SELECT \"Hello World\"\n-- LET x = 5\n-- FUNC greet(name) BEGIN ... END;\n-- use cursor/iterator\n-- IF x > 3 THEN print(\"greater\")\n-- This is a comment"
+  },
+  "zig": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "zig"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "seed7": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "see"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "csharp": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "csh"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "mirah": {
+    "structure": {
+      "print": "\\ Outputs text or value to console or output stream\n. \"{}\" print",
+      "assign": "\\ Assigns a value to a variable\nvariable {} {} !",
+      "function": "\\ Defines a reusable block of code or routine\n: {} ( n -- n )\n  {}\n;",
+      "loop": "\\ Iterates over a sequence or range\n: {} BEGIN {} WHILE {} REPEAT ;",
+      "if": "\\ Performs conditional logic\n{} IF {} THEN",
+      "comment": "\\ Adds human-readable comments\n\\ {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "mir"
+    ],
+    "example": ". \"\"Hello World\"\" print\nvariable x 5 !\n: greet ( n -- n )\n  name\n;\n: i BEGIN 5 WHILE print(i) REPEAT ;\nx > 3 IF print(\"greater\") THEN\n\\ This is a comment"
+  },
+  "r": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "r"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "haskell": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "has"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "ocaml": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "oca"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "java": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nprintf(\"{}\\n\", {});",
+      "assign": "// Assigns a value to a variable\nint {} = {};",
+      "function": "// Defines a reusable block of code or routine\nvoid {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "jav"
+    ],
+    "example": "printf(\"{}\\n\", {});\nint x = 5;\nvoid greet(name) {\n    print(\"Hi \" + name)\n}\nfor (int {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "factor": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "fac"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "slim": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "sli"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "pl1": {
+    "structure": {
+      "print": "// Outputs text or value to console or output stream\nconsole.log({});",
+      "assign": "// Assigns a value to a variable\nlet {} = {};",
+      "function": "// Defines a reusable block of code or routine\nfunction {}({}) {{\n    {}\n}}",
+      "loop": "// Iterates over a sequence or range\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}",
+      "if": "// Performs conditional logic\nif ({}) {{\n    {}\n}}",
+      "comment": "// Adds human-readable comments\n// {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "pl1"
+    ],
+    "example": "console.log(\"Hello World\");\nlet x = 5;\nfunction greet(name) {\n    print(\"Hi \" + name)\n}\nfor (let {} = 0; {} < {}; {}++) {{\n    {}\n}}\nif (x > 3) {\n    print(\"greater\")\n}\n// This is a comment"
+  },
+  "perl": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\nprint({})",
+      "assign": "# Assigns a value to a variable\n{} = {}",
+      "function": "# Defines a reusable block of code or routine\ndef {}({}):\n    {}",
+      "loop": "# Iterates over a sequence or range\nfor {} in range({}):\n    {}",
+      "if": "# Performs conditional logic\nif {}:\n    {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "per"
+    ],
+    "example": "print(\"Hello World\")\nx = 5\ndef greet(name):\n    print(\"Hi \" + name)\nfor i in range(5):\n    print(i)\nif x > 3:\n    print(\"greater\")\n# This is a comment"
+  },
+  "lisp": {
+    "structure": {
+      "print": "-- Outputs text or value to console or output stream\nputStrLn {}",
+      "assign": "-- Assigns a value to a variable\n{} = {}",
+      "function": "-- Defines a reusable block of code or routine\n{} {} =\n  {}",
+      "loop": "-- Iterates over a sequence or range\n-- recursion required",
+      "if": "-- Performs conditional logic\nif {} then\n  {}\nelse\n  ()",
+      "comment": "-- Adds human-readable comments\n-- {}"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "lis"
+    ],
+    "example": "putStrLn \"Hello World\"\nx = 5\ngreet name =\n  print(\"Hi \" + name)\n-- recursion required\nif x > 3 then\n  print(\"greater\")\nelse\n  ()\n-- This is a comment"
+  },
+  "awk": {
+    "structure": {
+      "print": "# Outputs text or value to console or output stream\necho {}",
+      "assign": "# Assigns a value to a variable\n{}={}",
+      "function": "# Defines a reusable block of code or routine\n{}() {{\n  {}\n}}",
+      "loop": "# Iterates over a sequence or range\nfor {} in $(seq 1 {}); do\n  {}\ndone",
+      "if": "# Performs conditional logic\nif [ {} ]; then\n  {}\nfi"
+    },
+    "keywords": [],
+    "file_extensions": [
+      "awk"
+    ],
+    "example": "echo \"Hello World\"\nx=5\ngreet() {\n  name\n}\nfor i in $(seq 1 5); do\n  print(i)\ndone\nif [ x > 3 ]; then\n  print(\"greater\")\nfi\n# This is a comment"
+  }
+}

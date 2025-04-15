@@ -57,12 +57,7 @@
     <h1><span data-i18n="title">🌐 USL: Universal Scripting Language</span></h1>
 
     <label for="langSelect"><span data-i18n="chooseLang">🌍 Choose Language:</span></label>
-    <select id="langSelect" onchange="setLang(this.value)">
-      <option value="en">🇺🇸 English</option>
-      <option value="pt">🇧🇷 Português</option>
-      <option value="es">🇪🇸 Español</option>
-      <option value="fr">🇫🇷 Français</option>
-    </select>
+    <select id="langSelect" onchange="setLang(this.value)"></select>
 
     <div class="card">
       <label><span data-i18n="uploadFile">📂 Upload File</span></label>
@@ -136,7 +131,8 @@
     window.onload = () => {
       populateOutputLanguages();
       populateOutputLanguages();
-      setLang("en");
+      populateUILanguageSelector();
+    setLang("en");
     };
   </script>
 

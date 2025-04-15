@@ -38,7 +38,8 @@ def generate_safe(template, *values):
 def transpile(lines, lang, syntax):
     struct = syntax.get(lang, {}).get("structure", {})
     comment = struct.get("comment", "# {}")
-    ext = syntax.get(lang, {}).get("file_extensions", [lang[:3]])[0]
+    exts = syntax.get(lang, {}).get("file_extensions", [])
+    ext = exts[0] if exts else lang[:3]
     filename = f"{lang}.{ext}"
     output_path = os.path.join(OUTPUT_DIR, filename)
     parsed = parse_usl_lines(lines, lang)
@@ -50,16 +51,19 @@ def transpile(lines, lang, syntax):
                 if "print(" in symbolic:
                     value = symbolic.split("print(", 1)[1].split(")", 1)[0]
                     f.write(generate_safe(struct.get("print", "{}"), value) + "\n")
-                elif "let " in symbolic:
+                elif "let " in symbolic and "=" in symbolic:
                     assign = symbolic.split("let ", 1)[1]
-                    left, right = assign.split("=")
+                    left, right = assign.split("=", 1)
                     f.write(generate_safe(struct.get("assign", "{} = {}"), left.strip(), right.strip()) + "\n")
                 elif symbolic.startswith("if "):
                     f.write(generate_safe(struct.get("if", "if {}:\n    {}"), symbolic[3:], "pass") + "\n")
                 elif symbolic.startswith("function "):
                     head = symbolic.split("function", 1)[-1].strip()
-                    name, args = head.split("(", 1)
-                    f.write(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.rstrip(")"), "pass") + "\n")
+                    if "(" in head:
+                        name, args = head.split("(", 1)
+                        f.write(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.rstrip(")"), "pass") + "\n")
+                    else:
+                        f.write(comment.format("Invalid function format: " + symbolic) + "\n")
                 elif symbolic.startswith("return "):
                     f.write(generate_safe(struct.get("return", "return {}"), symbolic[7:].strip()) + "\n")
                 elif symbolic.startswith("comment "):
@@ -106,18 +110,19 @@ def transpile_api():
                 if "print(" in symbolic:
                     val = symbolic.split("print(", 1)[1].split(")", 1)[0]
                     result_lines.append(generate_safe(struct.get("print", "{}"), val))
-                elif "let " in symbolic:
+                elif "let " in symbolic and "=" in symbolic:
                     assign = symbolic.split("let ", 1)[1]
-                    left, right = assign.split("=")
+                    left, right = assign.split("=", 1)
                     result_lines.append(generate_safe(struct.get("assign", "{} = {}"), left.strip(), right.strip()))
                 elif symbolic.startswith("if "):
                     cond = symbolic[3:]
                     result_lines.append(generate_safe(struct.get("if", "if {}:\n    {}"), cond.strip(), "pass"))
                 elif symbolic.startswith("function "):
                     head = symbolic.split("function", 1)[-1].strip()
-                    name, args = head.split("(", 1)
-                    args = args.rstrip(")")
-                    result_lines.append(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "pass"))
+                    if "(" in head:
+                        name, args = head.split("(", 1)
+                        args = args.rstrip(")")
+                        result_lines.append(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "pass"))
                 elif symbolic.startswith("return "):
                     result_lines.append(generate_safe(struct.get("return", "return {}"), symbolic.split("return", 1)[-1].strip()))
                 elif symbolic.startswith("comment "):
@@ -126,11 +131,7 @@ def transpile_api():
                     result_lines.append(comment.format("Unrecognized: " + symbolic))
             except Exception as e:
                 result_lines.append(comment.format(f"Error: {e} in line: {symbolic}"))
-        output_text = "\n".join(result_lines)
-        outputs[lang] = output_text
-        filename = f"{lang}.{syntax[lang]['file_extensions'][0]}"
-        with open(os.path.join(OUTPUT_DIR, filename), "w", encoding="utf-8") as f:
-            f.write(output_text)
+        outputs[lang] = "\n".join(result_lines)
     return jsonify({ "success": True, "outputs": outputs })
 
 @app.route("/download")

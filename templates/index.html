@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,22 +142,16 @@
         alert("Provide USL logic and select at least one language.");
         return;
       }
+      const formData = new FormData();
+      formData.append("usl_code", uslInput);
+      selectedLangs.forEach(lang => formData.append("languages", lang));
+
       fetch("/process", {
         method: "POST",
-        body: new URLSearchParams({
-          usl_code: uslInput,
-          languages: selectedLangs
-        }),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        body: formData
       })
       .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          document.getElementById("downloadSection").style.display = "block";
-        } else {
-          alert("Transpilation error.");
-        }
-      })
+      .then(() => document.getElementById("downloadSection").style.display = "block")
       .catch(err => {
         console.error("Transpilation error:", err);
         alert("Server error during transpilation.");

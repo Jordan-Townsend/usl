@@ -1,21 +1,27 @@
 
-import os, json, zipfile
-from flask import Flask, request, render_template_string, send_file
+import os
+import json
+import zipfile
+from flask import Flask, request, jsonify, render_template, send_file
 
-app = Flask(__name__)
-UPLOAD_DIR = "usl_web_uploads"
-OUTPUT_DIR = "usl_outputs"
-SYNTAX_FILE = "syntax_templates_verified_real_final.json"
+app = Flask(__name__, template_folder="templates")
+UPLOAD_DIR = "uploads"
+OUTPUT_DIR = "outputs"
+SYNTAX_FILE = "syntax_templates_fully_extended.json"
+REFERENCE_FILE = "usl_symbol_reference_full_i18n.json"
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def parse_usl_lines(lines, target_lang):
-    matched = []
-    fallback = []
+def load_syntax():
+    with open(SYNTAX_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def parse_usl_lines(lines, lang):
+    matched, fallback = [], []
     for line in lines:
         line = line.strip()
-        if line.startswith(f"Symbolic[{target_lang}]"):
+        if line.startswith(f"Symbolic[{lang}]"):
             matched.append(line.split("]:", 1)[-1].strip())
         elif line.startswith("Symbolic:"):
             fallback.append(line.split(":", 1)[-1].strip())
@@ -28,107 +34,70 @@ def generate_safe(template, *values):
     except:
         return "// Invalid template"
 
-def transpile(lines, lang, syntax):
-    struct = syntax[lang]["structure"]
-    comment = struct.get("comment", "# {}")
-    ext = syntax[lang]["file_extensions"][0]
-    filename = f"{lang}.{ext}"
-    output_path = os.path.join(OUTPUT_DIR, filename)
-    parsed = parse_usl_lines(lines, lang)
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-    error_log_path = os.path.join(OUTPUT_DIR, lang + "_log.txt")
-    error_lines = []
-    with open(output_path, "w") as f:
-        f.write(comment.format(f"This is {lang} syntax") + "\n")
+@app.route("/symbol_reference")
+def symbol_reference():
+    with open(REFERENCE_FILE, "r", encoding="utf-8") as f:
+        return jsonify(json.load(f))
+
+@app.route("/transpile", methods=["POST"])
+def transpile():
+    syntax = load_syntax()
+    usl_input = request.json.get("uslInput", "")
+    selected_langs = request.json.get("languages", [])
+    outputs = {}
+
+    lines = usl_input.splitlines()
+    for lang in selected_langs:
+        if lang not in syntax:
+            outputs[lang] = "// Language not supported."
+            continue
+
+        struct = syntax[lang]["structure"]
+        comment = struct.get("comment", "# {}")
+        parsed = parse_usl_lines(lines, lang)
+        result_lines = []
+
         for symbolic in parsed:
             try:
                 if "print(" in symbolic:
-                    value = symbolic.split("print(", 1)[1].split(")", 1)[0]
-                    f.write(generate_safe(struct.get("print", "{}"), value) + "\n")
+                    val = symbolic.split("print(", 1)[1].split(")", 1)[0]
+                    result_lines.append(generate_safe(struct.get("print", "{}"), val))
                 elif "let " in symbolic:
                     assign = symbolic.split("let ", 1)[1]
                     left, right = assign.split("=")
-                    f.write(generate_safe(struct.get("assign", "{} = {}"), left.strip(), right.strip()) + "\n")
+                    result_lines.append(generate_safe(struct.get("assign", "{} = {}"), left.strip(), right.strip()))
                 elif symbolic.startswith("if "):
-                    condition = symbolic[3:]
-                    f.write(generate_safe(struct.get("if", "if {}:\n    {}"), condition.strip(), "pass") + "\n")
+                    cond = symbolic[3:]
+                    result_lines.append(generate_safe(struct.get("if", "if {}:\n    {}"), cond.strip(), "pass"))
                 elif symbolic.startswith("function "):
                     head = symbolic.split("function", 1)[-1].strip()
                     name, args = head.split("(", 1)
                     args = args.rstrip(")")
-                    f.write(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "pass") + "\n")
+                    result_lines.append(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "pass"))
                 elif symbolic.startswith("return "):
-                    f.write(generate_safe(struct.get("return", "return {}"), symbolic.split("return", 1)[-1].strip()) + "\n")
+                    result_lines.append(generate_safe(struct.get("return", "return {}"), symbolic.split("return", 1)[-1].strip()))
                 elif symbolic.startswith("comment "):
-                    f.write(generate_safe(struct.get("comment", "# {}"), symbolic.split("comment", 1)[-1].strip().strip('"')) + "\n")
+                    result_lines.append(generate_safe(struct.get("comment", "# {}"), symbolic.split("comment", 1)[-1].strip().strip('"')))
                 else:
-                    f.write(comment.format("Unrecognized: " + symbolic) + "\n")
+                    result_lines.append(comment.format("Unrecognized: " + symbolic))
             except Exception as e:
-                error_lines.append(f"[{lang}] Line Error: {str(e)} in line: {symbolic}")
-                f.write(comment.format(f"Error: {e} in line: {symbolic}") + "\n")
-    if error_lines:
-        with open(error_log_path, "w") as errfile:
-            for err in error_lines:
-                errfile.write(err + "\n")
-    return filename
+                result_lines.append(comment.format(f"Error: {e} in line: {symbolic}"))
 
-def build_zip():
-    zip_path = os.path.join(OUTPUT_DIR, "all_outputs.zip")
+        outputs[lang] = "\n".join(result_lines)
+
+    return jsonify(outputs)
+
+@app.route("/download")
+def download():
+    zip_path = os.path.join(OUTPUT_DIR, "usl_outputs.zip")
     with zipfile.ZipFile(zip_path, "w") as zipf:
-        for f in os.listdir(OUTPUT_DIR):
-            if not f.endswith(".zip"):
-                zipf.write(os.path.join(OUTPUT_DIR, f), arcname=f)
-    return zip_path
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    zip_ready = False
-    languages = []
-    if os.path.exists(SYNTAX_FILE):
-        with open(SYNTAX_FILE, "r") as f:
-            syntax = json.load(f)
-            languages = ["usl"] + sorted(syntax.keys())
-    if request.method == "POST":
-        file = request.files.get("file")
-        if file:
-            path = os.path.join(UPLOAD_DIR, file.filename)
-            file.save(path)
-            with open(path, "r") as f:
-                lines = f.readlines()
-            selected = request.form.getlist("languages")
-            for lang in selected:
-                if lang == "usl":
-                    with open(os.path.join(OUTPUT_DIR, "usl_input_original.usl"), "w") as f_out:
-                        f_out.writelines(lines)
-                    continue
-                transpile(lines, lang, syntax)
-            build_zip()
-            zip_ready = True
-
-    return render_template_string("""
-    <html><head><title>USL App</title></head>
-    <body>
-    <h2>Upload a .usl file and select target language(s)</h2>
-    <form method="post" enctype="multipart/form-data">
-      <input type="file" name="file" required><br><br>
-      <label>Select one or more languages:</label><br>
-      <select name="languages" multiple size="15" required>
-        <option value="usl">USL (original)</option>
-        {% for lang in languages %}
-          <option value="{{ lang }}">{{ lang }}</option>
-        {% endfor %}
-      </select><br>
-      <input type="submit" value="Transpile">
-    </form>
-    {% if zip_ready %}
-      <h3><a href="/download_all">📦 Download ZIP</a></h3>
-    {% endif %}
-    </body></html>
-    """, zip_ready=zip_ready, languages=languages)
-
-@app.route("/download_all")
-def download_all():
-    return send_file(os.path.join(OUTPUT_DIR, "all_outputs.zip"), as_attachment=True)
+        for filename in os.listdir(OUTPUT_DIR):
+            zipf.write(os.path.join(OUTPUT_DIR, filename), arcname=filename)
+    return send_file(zip_path, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=10000)

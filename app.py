@@ -8,7 +8,7 @@ from reverse_parser import reverse_parser, detect_language_by_extension
 app = Flask(__name__)
 UPLOAD_DIR = "usl_web_uploads"
 OUTPUT_DIR = "usl_outputs"
-SYNTAX_FILE = "syntax_templates_verified_real_final.json"
+SYNTAX_FILE = "syntax_templates_fully_extended.json"
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -51,59 +51,9 @@ def transpile(lines, lang, syntax):
                 elif symbolic.startswith("Symbolic: if "):
                     cond = symbolic.split("if ", 1)[-1].strip()
                     f.write(generate_safe(struct.get("if", "if {}:\n    {}"), cond, "pass") + "\n")
-                elif symbolic.startswith("Symbolic: elif "):
-                    cond = symbolic.split("elif ", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("elif", "elif {}:\n    {}"), cond, "pass") + "\n")
-                elif symbolic.startswith("Symbolic: else"):
-                    f.write(generate_safe(struct.get("else", "else:\n    {}"), "pass") + "\n")
-                elif symbolic.startswith("Symbolic: loop "):
-                    expr = symbolic.split("loop ", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("loop", "for i in range({}):\n  {}"), expr, "pass") + "\n")
-                elif symbolic.startswith("Symbolic: while "):
-                    cond = symbolic.split("while ", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("while", "while {}:\n    {}"), cond, "pass") + "\n")
                 elif symbolic.startswith("Symbolic: return "):
                     value = symbolic.split("return", 1)[-1].strip()
                     f.write(generate_safe(struct.get("return", "return {}"), value) + "\n")
-                elif symbolic.startswith("Symbolic: throw "):
-                    value = symbolic.split("throw", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("throw", "throw {}"), value) + "\n")
-                elif symbolic.startswith("Symbolic: yield"):
-                    value = symbolic.split("yield", 1)[-1].strip() or "value"
-                    f.write(generate_safe(struct.get("yield", "yield {}"), value) + "\n")
-                elif symbolic.startswith("Symbolic: await "):
-                    val = symbolic.split("await ", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("await", "await {}"), val) + "\n")
-                elif symbolic.startswith("Symbolic: async"):
-                    f.write(generate_safe(struct.get("async", "async function {}({}) {{ {} }}"), "fetch", "url", "await fetch(url)") + "\n")
-                elif symbolic.startswith("Symbolic: try"):
-                    f.write(generate_safe(struct.get("try", "try {{ {} }} catch {{ {} }}"), "attempt", "handle") + "\n")
-                elif symbolic.startswith("Symbolic: break"):
-                    f.write(generate_safe(struct.get("break", "break")) + "\n")
-                elif symbolic.startswith("Symbolic: continue"):
-                    f.write(generate_safe(struct.get("continue", "continue")) + "\n")
-                elif symbolic.startswith("Symbolic: comment"):
-                    text = symbolic.split("comment", 1)[-1].strip().strip('"')
-                    f.write(generate_safe(struct.get("comment", "# {}"), text) + "\n")
-                elif symbolic.startswith("Symbolic: import "):
-                    val = symbolic.split("import", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("import", "import {}"), val) + "\n")
-                elif symbolic.startswith("Symbolic: switch "):
-                    val = symbolic.split("switch", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("switch", "switch({})"), val) + "\n")
-                elif symbolic.startswith("Symbolic: class "):
-                    header = symbolic.split("class", 1)[-1].strip()
-                    name, rest = header.split("(", 1)
-                    args = rest.split(")")[0]
-                    f.write(generate_safe(struct.get("class", "class {}({}):\n    def __init__(self):\n        {}"), name.strip(), args.strip(), "pass") + "\n")
-                elif symbolic.startswith("Symbolic: operator "):
-                    expr = symbolic.split("operator", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("operator", "{}"), expr) + "\n")
-                elif symbolic.startswith("Symbolic: namespace "):
-                    ns = symbolic.split("namespace", 1)[-1].strip()
-                    f.write(generate_safe(struct.get("namespace", "namespace {} {{ {} }}"), ns, "// logic") + "\n")
-                elif symbolic.startswith("Symbolic: main"):
-                    f.write(generate_safe(struct.get("main", "int main() {{ {} }}"), "return 0;") + "\n")
                 else:
                     f.write(comment.format("Unparsed: " + symbolic) + "\n")
             except Exception as e:
@@ -134,76 +84,54 @@ def index():
         file = request.files.get("file")
         if file:
             ext_lang = detect_language_by_extension(file.filename)
-        path = os.path.join(UPLOAD_DIR, file.filename)
-        file.save(path)
-        with open(path, "r") as f:
-            lines = f.readlines()
-
-        # Auto-reverse non-USL files
-        if not any(line.startswith("Symbolic:") for line in lines):
-            reversed_usl = reverse_parser(lines, ext_lang)
-            lines = [line + "\n" for line in reversed_usl]  # replace with reversed lines
-
             path = os.path.join(UPLOAD_DIR, file.filename)
             file.save(path)
+
             with open(path, "r") as f:
                 lines = f.readlines()
-            selected_langs = request.form.getlist("languages")
-            for lang in selected_langs:
-                if lang == "usl":
-                    with open(os.path.join(OUTPUT_DIR, "usl_input_original.usl"), "w") as f_out:
-                        f_out.writelines(lines)
-                    continue
-                transpile(lines, lang, syntax)
-                transpile(lines, lang, syntax)
+
+            if not any(line.startswith("Symbolic:") for line in lines):
+                reversed_usl = reverse_parser(lines, ext_lang)
+                lines = [line + "\n" for line in reversed_usl]
+
+            for lang in languages:
+                available_keys = syntax[lang].get("structure", {}).keys()
+                needed = [line.split()[1].split("(")[0] for line in lines if "Symbolic:" in line]
+                if any(symbol in available_keys for symbol in needed):
+                    transpile(lines, lang, syntax)
+
             build_zip()
             zip_ready = True
 
-    return render_template_string("""<html><head><title>USL Hosted App</title></head>
-<body>
-<h2>Upload a USL File and Transpile to All 111 Languages</h2>
-<form id="upload-form" method="post" enctype="multipart/form-data">
-  <p><b>Drop a .usl or .py/.js/.c file below or use Browse:</b></p>
-  <input type="file" name="file" id="fileInput" required><br><br>
-  <textarea id="preview" name="usl_preview" style="width:100%;height:150px;" readonly></textarea><br><br>
+    return render_template_string("""
+<html>
+<head>
+  <title>USL Web Converter</title>
   <script>
-    document.getElementById("fileInput").addEventListener("change", function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          document.getElementById("preview").value = evt.target.result;
-        };
-        reader.readAsText(file);
-      }
-    });
-  </script>
-  <label>Select one or more languages:</label><br>
-  <select id="language-select" name="languages" multiple size="15" required>
-    <option value="usl">USL (original)</option>
-
-    <option value="usl">USL (original)</option>
-    {% for lang in languages %}
-      <option value="{{ lang }}">{{ lang }}</option>
-    {% endfor %}
-  </select><br><br>
-  <input type="file" name="file" required><br><br>
-  <p style="font-size:0.9em;color:gray;">(Hold Ctrl or Cmd to select more than one)</p>
-  <button type="button" onclick="selectAll()">Select All</button><br><br>
-  <input type="submit" value="Transpile">
-  <script>
-    function selectAll() {
-      var select = document.getElementById("language-select");
-      for (var i = 0; i < select.options.length; i++) {
-        select.options[i].selected = true;
-      }
+    function previewFile() {
+      const fileInput = document.getElementById("fileInput");
+      const preview = document.getElementById("preview");
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.value = e.target.result;
+      };
+      reader.readAsText(file);
     }
   </script>
-</form>
-{% if zip_ready %}
-<h3><a href="/download_all">📦 Download All Outputs (ZIP)</a></h3>
-{% endif %}
-</body></html>
+</head>
+<body>
+  <h2>USL Converter – Upload .usl or Code File</h2>
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" onchange="previewFile()" required><br><br>
+    <textarea id="preview" style="width:100%;height:200px" readonly placeholder="Uploaded code preview..."></textarea><br><br>
+    <input type="submit" value="Convert">
+  </form>
+  {% if zip_ready %}
+  <h3><a href="/download_all">Download All Outputs (ZIP)</a></h3>
+  {% endif %}
+</body>
+</html>
 """, zip_ready=zip_ready, languages=languages)
 
 @app.route("/download_all")

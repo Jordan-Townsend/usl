@@ -110,7 +110,7 @@
     }
 
     function applyTranslations() {
-      fetch("/translations_extended.json")
+      fetch("/sl_symbol_reference_i18n_extended.json")
         .then(res => res.json())
         .then(data => {
           translations = data;
@@ -139,7 +139,7 @@
     }
 
     async function fetchLanguages() {
-      const res = await fetch("/languages");
+      const res = await fetch("/usl_symbol_reference_i18n_extended.json");
       const langs = await res.json();
       const langSelect = document.getElementById("langSelectOutput");
       langSelect.innerHTML = "";
@@ -152,7 +152,7 @@
     }
 
     async function fetchSymbolReference(lang = "en") {
-      const res = await fetch("/usl_symbol_reference_i18n_extended.json");
+      const res = await fetch("/syntax_templates_fully_extended.json");
       const data = await res.json();
       const block = document.getElementById("symbolRefBlock");
       block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) =>
@@ -197,6 +197,6 @@
       applyTranslations();
       fetchSymbolReference(langPref);
     };
-  </script>
+  </script>s
 </body>
 </html>

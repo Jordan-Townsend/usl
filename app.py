@@ -1,19 +1,27 @@
-import os, json, zipfile
-from flask import Flask, request, render_template, send_file, jsonify
 
-app = Flask(__name__)
+import os
+import json
+import zipfile
+from flask import Flask, request, jsonify, render_template, send_file
+
+app = Flask(__name__, template_folder="templates")
 UPLOAD_DIR = "usl_web_uploads"
 OUTPUT_DIR = "usl_outputs"
 SYNTAX_FILE = "syntax_templates_fully_extended.json"
+REFERENCE_FILE = "usl_symbol_reference_full_i18n.json"
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def parse_usl_lines(lines, target_lang):
+def load_syntax():
+    with open(SYNTAX_FILE, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def parse_usl_lines(lines, lang):
     matched, fallback = [], []
     for line in lines:
         line = line.strip()
-        if line.startswith(f"Symbolic[{target_lang}]"):
+        if line.startswith(f"Symbolic[{lang}]"):
             matched.append(line.split("]:", 1)[-1].strip())
         elif line.startswith("Symbolic:"):
             fallback.append(line.split(":", 1)[-1].strip())
@@ -60,29 +68,77 @@ def transpile(lines, lang, syntax):
                 f.write(comment.format(f"Error: {e} in line: {symbolic}") + "\n")
     return filename
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def index():
     return render_template("index.html")
 
-
+@app.route("/symbol_reference")
+def symbol_reference():
+    with open("usl_symbol_reference_full_i18n.json", "r", encoding="utf-8") as f:
+        return jsonify(json.load(f))
 
 @app.route("/languages")
 def get_languages():
-    syntax = json.load(open(SYNTAX_FILE, "r"))
+    syntax = load_syntax()
     return jsonify(sorted(syntax.keys()))
 
+@app.route("/transpile", methods=["POST"])
+def transpile_api():
+    syntax = load_syntax()
+    usl_input = request.json.get("uslInput", "")
+    selected_langs = request.json.get("languages", [])
+    outputs = {}
+
+    lines = usl_input.splitlines()
+    for lang in selected_langs:
+        if lang not in syntax:
+            outputs[lang] = "// Language not supported."
+            continue
+        struct = syntax[lang]["structure"]
+        comment = struct.get("comment", "# {}")
+        parsed = parse_usl_lines(lines, lang)
+        result_lines = []
+        for symbolic in parsed:
+            try:
+                if "print(" in symbolic:
+                    val = symbolic.split("print(", 1)[1].split(")", 1)[0]
+                    result_lines.append(generate_safe(struct.get("print", "{}"), val))
+                elif "let " in symbolic:
+                    assign = symbolic.split("let ", 1)[1]
+                    left, right = assign.split("=")
+                    result_lines.append(generate_safe(struct.get("assign", "{} = {}"), left.strip(), right.strip()))
+                elif symbolic.startswith("if "):
+                    cond = symbolic[3:]
+                    result_lines.append(generate_safe(struct.get("if", "if {}:\n    {}"), cond.strip(), "pass"))
+                elif symbolic.startswith("function "):
+                    head = symbolic.split("function", 1)[-1].strip()
+                    name, args = head.split("(", 1)
+                    args = args.rstrip(")")
+                    result_lines.append(generate_safe(struct.get("function", "def {}({}):\n    {}"), name.strip(), args.strip(), "pass"))
+                elif symbolic.startswith("return "):
+                    result_lines.append(generate_safe(struct.get("return", "return {}"), symbolic.split("return", 1)[-1].strip()))
+                elif symbolic.startswith("comment "):
+                    result_lines.append(generate_safe(struct.get("comment", "# {}"), symbolic.split("comment", 1)[-1].strip().strip('"')))
+                else:
+                    result_lines.append(comment.format("Unrecognized: " + symbolic))
+            except Exception as e:
+                result_lines.append(comment.format(f"Error: {e} in line: {symbolic}"))
+        outputs[lang] = "\n".join(result_lines)
+    return jsonify(outputs)
+
 @app.route("/process", methods=["POST"])
-def process():
-    syntax = json.load(open(SYNTAX_FILE, "r"))
+def process_file_or_form():
+    syntax = load_syntax()
     results = {}
     uploaded_file = request.files.get("usl_file")
     input_text = request.form.get("usl_code", "")
     lines = uploaded_file.read().decode().splitlines() if uploaded_file else input_text.splitlines()
     languages = request.form.getlist("languages")
+
     for lang in languages:
         if lang == "usl":
             with open(os.path.join(OUTPUT_DIR, "usl_input_original.usl"), "w") as f:
-                f.writelines(lines)
+                f.writelines(line + "\n" for line in lines)
             results["usl"] = "\n".join(lines)
         else:
             filename = transpile(lines, lang, syntax)
@@ -92,7 +148,7 @@ def process():
 
 @app.route("/download")
 def download_all():
-    zip_path = os.path.join(OUTPUT_DIR, "all_outputs.zip")
+    zip_path = os.path.join(OUTPUT_DIR, "Usl_all_output(s).zip")
     with zipfile.ZipFile(zip_path, "w") as zipf:
         for f in os.listdir(OUTPUT_DIR):
             if not f.endswith(".zip"):

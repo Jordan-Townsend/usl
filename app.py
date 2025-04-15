@@ -8,7 +8,7 @@ from reverse_parser import reverse_parser, detect_language_by_extension
 app = Flask(__name__)
 UPLOAD_DIR = "usl_web_uploads"
 OUTPUT_DIR = "usl_outputs"
-SYNTAX_FILE = "syntax_templates_fully_extended.json"
+SYNTAX_FILE = "syntax_templates_verified_real_final.json"
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)

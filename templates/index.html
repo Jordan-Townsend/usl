@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>USL i18n Interface</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e1e;
+      color: #eee;
+      margin: 0;
+      padding: 2em;
+    }
+    .container { max-width: 960px; margin: auto; }
+    .card {
+      background: #2a2a2a;
+      padding: 2em;
+      border-radius: 8px;
+      margin-bottom: 2em;
+    }
+    select, input, textarea, button {
+      width: 100%;
+      padding: 0.75em;
+      border: none;
+      margin-top: 0.5em;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    textarea {
+      background: #111;
+      color: #eee;
+      height: 150px;
+    }
+    button {
+      background-color: #007acc;
+      color: white;
+      font-weight: bold;
+      margin-top: 1em;
+      cursor: pointer;
+    }
+    .symbol-help {
+      background: #444;
+      color: #ddd;
+      padding: 1em;
+      border-radius: 6px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1><span data-i18n="title">🌐 USL: Universal Scripting Language</span></h1>
+
+  <label for="langSelect"><span data-i18n="chooseLang">🌍 Choose Language:</span></label>
+  <select id="langSelect" onchange="setLang(this.value)">
+    <option value="en">🇺🇸 English</option>
+    <option value="pt">🇧🇷 Português</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="fr">🇫🇷 Français</option>
+  </select>
+
+  <div class="card">
+    <label><span data-i18n="uploadFile">📂 Upload File</span></label>
+    <input type="file" id="fileInput" onchange="previewFile()">
+
+    <label><span data-i18n="editLogic">📝 Edit or Paste USL Logic</span></label>
+    <textarea id="uslInput" placeholder="Symbolic: print('Hello')..."></textarea>
+
+    <label><span data-i18n="selectLangs">🌍 Select Output Languages</span></label>
+    <select multiple>
+      <option selected>Python</option>
+      <option selected>JavaScript</option>
+      <option>Rust</option>
+      <option>HTML</option>
+      <option>Go</option>
+    </select>
+
+    <button onclick="alert('Transpiling...')"><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
+    <button onclick="alert('Saved!')"><span data-i18n="saveSession">💾 Save Session</span></button>
+  </div>
+
+  <div class="card">
+    <h2><span data-i18n="symbolRef">📘 Symbolic Reference</span></h2>
+    <div class="symbol-help" id="symbolRefBlock"><span>Loading...</span>
+      <ul>
+        <li><strong>let x = 5</strong> – <span data-i18n="letAssign">Assign a variable</span></li>
+        <li><strong>print("msg")</strong> – <span data-i18n="printText">Output text</span></li>
+        <li><strong>function greet(name)</strong> – <span data-i18n="defineFunc">Define a function</span></li>
+        <li><strong>if x > 0</strong> – <span data-i18n="ifCheck">Conditional check</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const translations = {
+  en: {
+    title: "🌐 USL: Universal Scripting Language",
+    chooseLang: "🌍 Choose Language:",
+    uploadFile: "📂 Upload File",
+    editLogic: "📝 Edit or Paste USL Logic",
+    selectLangs: "🌍 Select Output Languages",
+    transpileBtn: "🚀 Transpile & Preview",
+    saveSession: "💾 Save Session",
+    symbolRef: "📘 Symbolic Reference",
+    letAssign: "Assign a variable",
+    printText: "Output text",
+    defineFunc: "Define a function",
+    ifCheck: "Conditional check"
+  },
+  pt: {
+    title: "🌐 USL: Linguagem Universal de Script",
+    chooseLang: "🌍 Escolher Idioma:",
+    uploadFile: "📂 Enviar Arquivo",
+    editLogic: "📝 Editar ou Colar Lógica USL",
+    selectLangs: "🌍 Selecionar Linguagens de Saída",
+    transpileBtn: "🚀 Transpilar e Visualizar",
+    saveSession: "💾 Salvar Sessão",
+    symbolRef: "📘 Referência Simbólica",
+    letAssign: "Atribuir uma variável",
+    printText: "Exibir texto",
+    defineFunc: "Definir uma função",
+    ifCheck: "Verificação condicional"
+  },
+  es: {
+    title: "🌐 USL: Lenguaje Universal de Script",
+    chooseLang: "🌍 Elegir idioma:",
+    uploadFile: "📂 Subir archivo",
+    editLogic: "📝 Editar o pegar lógica USL",
+    selectLangs: "🌍 Seleccionar idiomas de salida",
+    transpileBtn: "🚀 Transpilar y previsualizar",
+    saveSession: "💾 Guardar sesión",
+    symbolRef: "📘 Referencia simbólica",
+    letAssign: "Asignar una variable",
+    printText: "Imprimir texto",
+    defineFunc: "Definir una función",
+    ifCheck: "Verificación condicional"
+  },
+  fr: {
+    title: "🌐 USL: Langage Universel de Script",
+    chooseLang: "🌍 Choisir la langue :",
+    uploadFile: "📂 Télécharger un fichier",
+    editLogic: "📝 Éditer ou coller la logique USL",
+    selectLangs: "🌍 Sélectionner les langues de sortie",
+    transpileBtn: "🚀 Transpiler et prévisualiser",
+    saveSession: "💾 Sauvegarder la session",
+    symbolRef: "📘 Référence Symbolique",
+    letAssign: "Affecter une variable",
+    printText: "Afficher du texte",
+    defineFunc: "Définir une fonction",
+    ifCheck: "Conditionnelle"
+  }
+};
+
+function setLang(lang) {
+  const elements = document.querySelectorAll("[data-i18n]");
+  elements.forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (translations[lang] && translations[lang][key]) {
+      el.innerText = translations[lang][key];
+    }
+  });
+}
+
+function previewFile() {
+  const input = document.getElementById("fileInput");
+  const preview = document.getElementById("uslInput");
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    preview.value = e.target.result;
+  };
+  reader.readAsText(input.files[0]);
+}
+
+<script>
+const translations = {
+  en: {},
+  pt: {},
+  es: {},
+  fr: {}
+};
+
+function setLang(lang) {
+  const elements = document.querySelectorAll("[data-i18n]");
+  elements.forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (translations[lang] && translations[lang][key]) {
+      el.innerText = translations[lang][key];
+    }
+  });
+  renderSymbolReference(lang);
+}
+
+function previewFile() {
+  const input = document.getElementById("fileInput");
+  const preview = document.getElementById("uslInput");
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    preview.value = e.target.result;
+  };
+  reader.readAsText(input.files[0]);
+}
+
+function renderSymbolReference(lang) {
+  const refBlock = document.getElementById("symbolRefBlock");
+  fetch('usl_symbol_reference_full_i18n.json')
+    .then(r => r.json())
+    .then(data => {
+      refBlock.innerHTML = '<ul>' + Object.entries(data).map(([key, val]) => {
+        return `<li><strong>${key}</strong> – ${val[lang]}</li>`;
+      }).join('') + '</ul>';
+    });
+}
+</script>
+</script>
+</body>
+</html>
+ 

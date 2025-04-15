@@ -76,19 +76,15 @@
 
       <button onclick="transpile()"><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
       <button onclick="saveSession()"><span data-i18n="saveSession">💾 Save Session</span></button>
-       <button onclick="clearSession()"><span data-i18n="clearSession">🗑 Clear Session</span></button>
+      <button onclick="clearSession()"><span data-i18n="clearSession">🗑 Clear Session</span></button>
       <div id="downloadSection" style="display:none; margin-top:1em;">
-        <button onclick="window.location.href='/download'">
-          📦 Download All Outputs (ZIP)
-        </button>
+        <button onclick="window.location.href='/download'">📦 Download All Outputs (ZIP)</button>
       </div>
     </div>
 
     <div class="card">
       <h2><span data-i18n="symbolRef">📘 Symbolic Reference</span></h2>
-      <div class="symbol-help" id="symbolRefBlock">
-        Loading symbolic reference...
-      </div>
+      <div class="symbol-help" id="symbolRefBlock">Loading symbolic reference...</div>
     </div>
   </div>
 
@@ -163,7 +159,6 @@
         `<li><strong>${key}</strong> – ${val[lang] || val["en"]}</li>`).join("") + "</ul>";
     }
 
-    
     function saveSession() {
       const code = document.getElementById("uslInput").value;
       const langs = Array.from(document.getElementById("langSelectOutput").selectedOptions).map(opt => opt.value);
@@ -178,7 +173,8 @@
       alert("Session cleared!");
       location.reload();
     }
- {
+
+    function restoreSession() {
       const savedCode = localStorage.getItem("usl_code");
       const savedLangs = JSON.parse(localStorage.getItem("usl_langs") || "[]");
       if (savedCode) document.getElementById("uslInput").value = savedCode;
@@ -188,13 +184,13 @@
       }
     }
 
-function transpile() {
+    function transpile() {
       alert("Transpilation triggered!");
       document.getElementById("downloadSection").style.display = "block";
     }
 
     window.onload = () => {
-  restoreSession();
+      restoreSession();
       const langPref = localStorage.getItem("preferredLang") || "en";
       currentLang = langPref;
       fetchLanguages();

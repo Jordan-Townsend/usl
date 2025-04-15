@@ -8,7 +8,7 @@ app = Flask(__name__, template_folder="templates")
 UPLOAD_DIR = "usl_web_uploads"
 OUTPUT_DIR = "usl_outputs"
 SYNTAX_FILE = "syntax_templates_fully_extended.json"
-REFERENCE_FILE = "usl_symbol_reference_full_i18n.json"
+REFERENCE_FILE = "usl_symbol_reference_i18n_extended.json"
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -74,7 +74,7 @@ def index():
 
 @app.route("/symbol_reference")
 def symbol_reference():
-    with open("usl_symbol_reference_full_i18n.json", "r", encoding="utf-8") as f:
+    with open("usl_symbol_reference_i18n_extended.json", "r", encoding="utf-8") as f:
         return jsonify(json.load(f))
 
 @app.route("/languages")
@@ -148,7 +148,7 @@ def process_file_or_form():
 
 @app.route("/download")
 def download_all():
-    zip_path = os.path.join(OUTPUT_DIR, "Usl_all_output(s).zip")
+    zip_path = os.path.join(OUTPUT_DIR, "all_outputs.zip")
     with zipfile.ZipFile(zip_path, "w") as zipf:
         for f in os.listdir(OUTPUT_DIR):
             if not f.endswith(".zip"):

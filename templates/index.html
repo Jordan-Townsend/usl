@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,75 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>USL: Universal Scripting Language</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #1e1e1e;
-      color: #eee;
-      margin: 0;
-      padding: 2em;
-    }
-    .container {
-      max-width: 960px;
-      margin: auto;
-    }
-    .card {
-      background: #2a2a2a;
-      padding: 2em;
-      border-radius: 8px;
-      margin-bottom: 2em;
-    }
-    select {
-      color: #000 !important;
-      background-color: #fff !important;
-    }
-    input, textarea, button {
-      width: 100%;
-      padding: 0.75em;
-      border: none;
-      margin-top: 0.5em;
-      border-radius: 6px;
-      font-size: 1em;
-    }
-    textarea {
-      background: #111;
-      color: #eee;
-      height: 150px;
-    }
-    button {
-      background-color: #007acc;
-      color: white;
-      font-weight: bold;
-      margin-top: 1em;
-      cursor: pointer;
-    }
-    .symbol-help {
-      background: #444;
-      color: #ddd;
-      padding: 1em;
-      border-radius: 6px;
-      font-size: 0.9em;
-    }
+    body { font-family: 'Segoe UI', sans-serif; background-color: #1e1e1e; color: #eee; margin: 0; padding: 2em; }
+    .container { max-width: 960px; margin: auto; }
+    .card { background: #2a2a2a; padding: 2em; border-radius: 8px; margin-bottom: 2em; }
+    select { color: #000 !important; background-color: #fff !important; }
+    input, textarea, button { width: 100%; padding: 0.75em; border: none; margin-top: 0.5em; border-radius: 6px; font-size: 1em; }
+    textarea { background: #111; color: #eee; height: 150px; }
+    button { background-color: #007acc; color: white; font-weight: bold; margin-top: 1em; cursor: pointer; }
+    .symbol-help { background: #444; color: #ddd; padding: 1em; border-radius: 6px; font-size: 0.9em; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1><span data-i18n="title">🌐 USL: Universal Scripting Language</span></h1>
-
     <label for="langSelect"><span data-i18n="chooseLang">🌍 Choose Language:</span></label>
     <select id="langSelect" onchange="setLang(this.value)"></select>
 
     <div class="card">
       <label><span data-i18n="uploadFile">📂 Upload File</span></label>
       <input type="file" id="fileInput" onchange="previewFile()" />
-
       <label><span data-i18n="editLogic">📝 Edit or Paste USL Logic</span></label>
       <textarea id="uslInput" placeholder="Symbolic: print('Hello')..."></textarea>
-
       <label><span data-i18n="selectLangs">🌍 Select Output Languages</span><br>
         <small style="color: #aaa;">Select one or more languages to convert your USL into.</small>
       </label>
       <select id="langSelectOutput" multiple></select>
-
       <button onclick="transpile()"><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
       <button onclick="saveSession()"><span data-i18n="saveSession">💾 Save Session</span></button>
       <button onclick="clearSession()"><span data-i18n="clearSession">🗑 Clear Session</span></button>
@@ -96,9 +53,7 @@
       const input = document.getElementById("fileInput");
       const preview = document.getElementById("uslInput");
       const reader = new FileReader();
-      reader.onload = function (e) {
-        preview.value = e.target.result;
-      };
+      reader.onload = e => preview.value = e.target.result;
       reader.readAsText(input.files[0]);
     }
 
@@ -116,11 +71,7 @@
           translations = data;
           document.querySelectorAll("[data-i18n]").forEach(el => {
             const key = el.getAttribute("data-i18n");
-            if (translations[currentLang] && translations[currentLang][key]) {
-              el.innerText = translations[currentLang][key];
-            } else if (translations["en"] && translations["en"][key]) {
-              el.innerText = translations["en"][key];
-            }
+            el.innerText = translations[currentLang]?.[key] || translations["en"]?.[key] || el.innerText;
           });
           populateUILanguageSelector();
         });
@@ -129,12 +80,12 @@
     function populateUILanguageSelector() {
       const select = document.getElementById("langSelect");
       select.innerHTML = "";
-      Object.keys(translations).forEach(langCode => {
-        const option = document.createElement("option");
-        option.value = langCode;
-        option.textContent = langCode;
-        if (langCode === currentLang) option.selected = true;
-        select.appendChild(option);
+      Object.keys(translations).forEach(lang => {
+        const opt = document.createElement("option");
+        opt.value = lang;
+        opt.textContent = lang;
+        if (lang === currentLang) opt.selected = true;
+        select.appendChild(opt);
       });
     }
 
@@ -175,18 +126,33 @@
     }
 
     function restoreSession() {
-      const savedCode = localStorage.getItem("usl_code");
-      const savedLangs = JSON.parse(localStorage.getItem("usl_langs") || "[]");
-      if (savedCode) document.getElementById("uslInput").value = savedCode;
-      const langSelect = document.getElementById("langSelectOutput");
-      for (let i = 0; i < langSelect.options.length; i++) {
-        langSelect.options[i].selected = savedLangs.includes(langSelect.options[i].value);
+      const code = localStorage.getItem("usl_code");
+      const langs = JSON.parse(localStorage.getItem("usl_langs") || "[]");
+      document.getElementById("uslInput").value = code || "";
+      const select = document.getElementById("langSelectOutput");
+      for (let i = 0; i < select.options.length; i++) {
+        select.options[i].selected = langs.includes(select.options[i].value);
       }
     }
 
     function transpile() {
-      alert("Transpilation triggered!");
-      document.getElementById("downloadSection").style.display = "block";
+      const uslInput = document.getElementById("uslInput").value;
+      const selectedLangs = Array.from(document.getElementById("langSelectOutput").selectedOptions).map(opt => opt.value);
+      if (!uslInput.trim() || selectedLangs.length === 0) {
+        alert("Provide USL logic and select at least one language.");
+        return;
+      }
+      fetch("/process", {
+        method: "POST",
+        body: new URLSearchParams({
+          usl_code: uslInput,
+          languages: selectedLangs
+        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+      })
+      .then(res => res.json())
+      .then(() => document.getElementById("downloadSection").style.display = "block")
+      .catch(err => console.error("Transpilation error:", err));
     }
 
     window.onload = () => {

@@ -1,3 +1,4 @@
+
 import os
 import json
 import zipfile
@@ -112,15 +113,13 @@ def build_zip():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    result_text = ""
-    output_file = None
     zip_ready = False
     languages = []
 
     if os.path.exists(SYNTAX_FILE):
         with open(SYNTAX_FILE, "r") as f:
             syntax = json.load(f)
-            languages = ['usl'] + sorted(syntax.keys())
+            languages = sorted(syntax.keys())
     else:
         return "Syntax file missing."
 
@@ -131,41 +130,27 @@ def index():
             file.save(path)
             with open(path, "r") as f:
                 lines = f.readlines()
-            selected_langs = request.form.getlist("languages")
-            for lang in selected_langs:
-                if lang == "usl":
-                    with open(os.path.join(OUTPUT_DIR, "usl_input_original.usl"), "w") as f_out:
-                        f_out.writelines(lines)
-                    continue
-                transpile(lines, lang, syntax)
+            for lang in languages:
                 transpile(lines, lang, syntax)
             build_zip()
             zip_ready = True
 
-    return render_template_string("""
-<html><head><title>USL Hosted All Languages</title></head>
+    return render_template_string("""<html><head><title>USL Hosted App</title></head>
 <body>
-<h2>Upload a USL File and Transpile into 111 Languages</h2>
+<h2>Upload a USL File and Transpile to All 111 Languages</h2>
 <form method="post" enctype="multipart/form-data">
-  <label>Select target languages (Ctrl+Click or Cmd+Click to select multiple):</label><br>
-  <select name="languages" multiple size="12" required>
-    <option value="usl">USL (original)</option>
-    {% for lang in languages %}
-      <option value="{{ lang }}">{{ lang }}</option>
-    {% endfor %}
-  </select><br><br>
   <input type="file" name="file" required><br><br>
-  <input type="submit" value="Transpile to All">
+  <input type="submit" value="Transpile">
 </form>
 {% if zip_ready %}
 <h3><a href="/download_all">📦 Download All Outputs (ZIP)</a></h3>
 {% endif %}
 </body></html>
-""", result_text=result_text, output_file=output_file, zip_ready=zip_ready, languages=languages)
+""", zip_ready=zip_ready, languages=languages)
 
 @app.route("/download_all")
 def download_all():
     return send_file(os.path.join(OUTPUT_DIR, "all_outputs.zip"), as_attachment=True)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=10000)

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +102,7 @@
     }
 
     async function fetchSymbolReference(lang = "en") {
-      const res = await fetch("/static/usl_symbol_reference_full_i18n.json");
+      const res = await fetch("/symbol_reference");
       const data = await res.json();
       const block = document.getElementById("symbolRefBlock");
       block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) =>

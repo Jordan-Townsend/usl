@@ -1,138 +1,104 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>USL: Universal Scripting Language</title>
+  <title>USL Transpiler</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #1e1e1e;
-      color: #eee;
-      margin: 0;
-      padding: 2em;
-    }
-    .container {
-      max-width: 960px;
-      margin: auto;
-    }
-    .card {
-      background: #2a2a2a;
-      padding: 2em;
-      border-radius: 8px;
-      margin-bottom: 2em;
-    }
-    select, input, textarea, button {
+    body { font-family: Arial, sans-serif; padding: 30px; background: #f5f7fa; }
+    h1 { color: #2c3e50; }
+    textarea, select, input[type=file], button {
       width: 100%;
-      padding: 0.75em;
-      border: none;
-      margin-top: 0.5em;
-      border-radius: 6px;
+      padding: 10px;
+      margin: 10px 0;
       font-size: 1em;
     }
-    textarea {
-      background: #111;
-      color: #eee;
-      height: 150px;
-    }
-    button {
-      background-color: #007acc;
+    .btn {
+      background: #3498db;
       color: white;
-      font-weight: bold;
-      margin-top: 1em;
+      border: none;
       cursor: pointer;
-    }
-    .symbol-help {
-      background: #444;
-      color: #ddd;
-      padding: 1em;
       border-radius: 6px;
+    }
+    .output {
+      white-space: pre-wrap;
+      background: #ecf0f1;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+    }
+    .instructions {
+      background: #eef4ff;
+      border-left: 6px solid #4677f5;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .footer {
+      margin-top: 20px;
       font-size: 0.9em;
+      color: #888;
+    }
+    a {
+      color: #3498db;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1><span data-i18n="title">🌐 USL: Universal Scripting Language</span></h1>
-
-    <label for="langSelect"><span data-i18n="chooseLang">🌍 Choose Language:</span></label>
-    <select id="langSelect" onchange="setLang(this.value)">
-      <option value="en">🇺🇸 English</option>
-      <option value="pt">🇧🇷 Português</option>
-      <option value="es">🇪🇸 Español</option>
-      <option value="fr">🇫🇷 Français</option>
-    </select>
-
-    <div class="card">
-      <label><span data-i18n="uploadFile">📂 Upload File</span></label>
-      <input type="file" id="fileInput" onchange="previewFile()" />
-
-      <label><span data-i18n="editLogic">📝 Edit or Paste USL Logic</span></label>
-      <textarea id="uslInput" placeholder="Symbolic: print('Hello')..."></textarea>
-
-      <label><span data-i18n="selectLangs">🌍 Select Output Languages</span></label>
-      <select id="langSelectOutput" multiple>
-        <option selected>Python</option>
-        <option selected>JavaScript</option>
-        <option>Rust</option>
-        <option>HTML</option>
-        <option>Go</option>
-      </select>
-
-      <button><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
-      <button><span data-i18n="saveSession">💾 Save Session</span></button>
-    </div>
-
-    <div class="card">
-      <h2><span data-i18n="symbolRef">📘 Symbolic Reference</span></h2>
-      <div class="symbol-help" id="symbolRefBlock">
-        <span>Loading symbolic reference...</span>
-      </div>
-    </div>
+  <h1>Universal Scripting Language (USL)</h1>
+  <div class="instructions">
+    <strong>How to Use:</strong>
+    <ul>
+      <li>📄 Upload or paste your <code>.usl</code> logic (or <a href="/static/demo_input.usl" download>download a sample</a>)</li>
+      <li>🗂 Select one or more output languages (use Ctrl/Cmd to multi-select)</li>
+      <li>⚙️ Click "Transpile" to view your output below</li>
+      <li>💾 Download full zip at any time</li>
+    </ul>
   </div>
-
+  <form id="uslForm">
+    <label>Paste USL Code:</label>
+    <textarea name="usl_code" rows="10" placeholder="Symbolic[python]: print('Hello')"></textarea><br>
+    <label>Or Upload .usl File:</label>
+    <input type="file" name="usl_file"><br>
+    <label>Select Output Languages:</label>
+    <select name="languages" multiple size="10" id="langSelect">
+    </select><br>
+    <button type="button" class="btn" onclick="selectAll()">Select All</button><br>
+    <button type="submit" class="btn">Transpile</button>
+  </form>
+  <div id="output" class="output"></div>
+  <div class="footer">
+    Built with 🧠 by Townsend Atomics • <a href="https://townsendatomics.gumroad.com/l/usl" target="_blank">Support on Gumroad</a><br>
+  </div>
   <script>
-    const translations = { en: {}, pt: {}, es: {}, fr: {} };
-
-    function previewFile() {
-      const input = document.getElementById("fileInput");
-      const preview = document.getElementById("uslInput");
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        preview.value = e.target.result;
-      };
-      reader.readAsText(input.files[0]);
+    function selectAll() {
+      const select = document.getElementById('langSelect');
+      for (let i = 0; i < select.options.length; i++) {
+        select.options[i].selected = true;
+      }
     }
 
-    function setLang(lang) {
-      const elements = document.querySelectorAll("[data-i18n]");
-      elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (translations[lang] && translations[lang][key]) {
-          el.innerText = translations[lang][key];
-        }
+    document.getElementById('uslForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const res = await fetch('/process', { method: 'POST', body: formData });
+      const data = await res.json();
+      const out = document.getElementById('output');
+      out.innerHTML = Object.entries(data).map(([lang, code]) =>
+        `<h3>${lang}</h3><pre>${code}</pre>`
+      ).join('');
+    });
+
+    window.addEventListener("load", async () => {
+      const res = await fetch("/languages");
+      const langs = await res.json();
+      const select = document.getElementById("langSelect");
+      select.innerHTML = '<option value="usl">USL (original)</option>';
+      langs.forEach(lang => {
+        const opt = document.createElement("option");
+        opt.value = lang;
+        opt.textContent = lang;
+        select.appendChild(opt);
       });
-      renderSymbolReference(lang);
-    }
-
-    function renderSymbolReference(lang) {
-      fetch("/symbol_reference")
-        .then(res => res.json())
-        .then(data => {
-          const block = document.getElementById("symbolRefBlock");
-          block.innerHTML = "<ul>" + Object.entries(data).map(([key, val]) => {
-            return `<li><strong>${key}</strong> – ${val[lang] || val["en"]}</li>`;
-          }).join("") + "</ul>";
-        })
-        .catch(() => {
-          document.getElementById("symbolRefBlock").innerText = "⚠️ Failed to load symbolic reference.";
-        });
-    }
-
-    window.onload = () => {
-      setLang("en");
-    };
+    });
   </script>
 </body>
 </html>

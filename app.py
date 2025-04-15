@@ -5,10 +5,12 @@ import zipfile
 from flask import Flask, request, jsonify, render_template, send_file
 
 app = Flask(__name__, template_folder="templates")
+
 UPLOAD_DIR = "usl_web_uploads"
 OUTPUT_DIR = "usl_outputs"
 SYNTAX_FILE = "syntax_templates_fully_extended.json"
 REFERENCE_FILE = "usl_symbol_reference_i18n_extended.json"
+TRANSLATIONS_FILE = "translations_extended.json"
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -41,6 +43,7 @@ def transpile(lines, lang, syntax):
     filename = f"{lang}.{ext}"
     output_path = os.path.join(OUTPUT_DIR, filename)
     parsed = parse_usl_lines(lines, lang)
+
     with open(output_path, "w") as f:
         f.write(comment.format(f"This is {lang} syntax") + "\n")
         for symbolic in parsed:
@@ -74,7 +77,7 @@ def index():
 
 @app.route("/symbol_reference")
 def symbol_reference():
-    with open("usl_symbol_reference_i18n_extended.json", "r", encoding="utf-8") as f:
+    with open(REFERENCE_FILE, "r", encoding="utf-8") as f:
         return jsonify(json.load(f))
 
 @app.route("/languages")

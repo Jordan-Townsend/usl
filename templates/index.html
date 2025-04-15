@@ -132,7 +132,9 @@
       populateOutputLanguages();
       populateOutputLanguages();
       populateUILanguageSelector();
-    setLang("en");
+    const langPref = localStorage.getItem("preferredLang") || "en";
+    populateUILanguageSelector();
+    setLang(langPref);
     };
   </script>
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,18 +18,22 @@
 <body>
   <div class="container">
     <h1><span data-i18n="title">🌐 USL: Universal Scripting Language</span></h1>
+
     <label for="langSelect"><span data-i18n="chooseLang">🌍 Choose Language:</span></label>
     <select id="langSelect" onchange="setLang(this.value)"></select>
 
     <div class="card">
       <label><span data-i18n="uploadFile">📂 Upload File</span></label>
       <input type="file" id="fileInput" onchange="previewFile()" />
+
       <label><span data-i18n="editLogic">📝 Edit or Paste USL Logic</span></label>
       <textarea id="uslInput" placeholder="Symbolic: print('Hello')..."></textarea>
+
       <label><span data-i18n="selectLangs">🌍 Select Output Languages</span><br>
         <small style="color: #aaa;">Select one or more languages to convert your USL into.</small>
       </label>
       <select id="langSelectOutput" multiple></select>
+
       <button onclick="transpile()"><span data-i18n="transpileBtn">🚀 Transpile & Preview</span></button>
       <button onclick="saveSession()"><span data-i18n="saveSession">💾 Save Session</span></button>
       <button onclick="clearSession()"><span data-i18n="clearSession">🗑 Clear Session</span></button>

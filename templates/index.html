@@ -23,7 +23,12 @@
       border-radius: 8px;
       margin-bottom: 2em;
     }
-    select, input, textarea, button {
+    select,
+    select {
+      color: #000 !important;
+      background-color: #fff !important;
+    }
+ input, textarea, button {
       width: 100%;
       padding: 0.75em;
       border: none;
@@ -91,7 +96,7 @@
   </div>
 
   <script>
-    const translations = { en: {}, pt: {}, es: {}, fr: {} };
+    
 
     function previewFile() {
       const input = document.getElementById("fileInput");
@@ -136,13 +141,15 @@
     populateUILanguageSelector();
     setLang(langPref);
     };
-  </script>
+  let translations = {};
+</script>
 
     <script>
       function showDownloadButton() {
         document.getElementById("downloadSection").style.display = "block";
       }
-    </script>
+    
+</script>
     
 <script>
   async function fetchLanguages() {
@@ -178,12 +185,13 @@
     fetchLanguages();
     fetchSymbolReference();
   };
+
 </script>
 
 
 <script>
   let currentLang = "en";
-  let consttranslations = {};
+  
 
   function setLang(lang) {
     currentLang = lang;
@@ -242,6 +250,7 @@
     fetchSymbolReference();
     setLang("en");
   };
+
 </script>
 
 </body>
